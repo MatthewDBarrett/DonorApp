@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">DonorApp</string>
+
+    <!--BUTTONS-->
+    <string name="loginBtn">Login</string>
+    <string name="registerBtn">Register</string>
+
+    <!--TEXT VIEWS-->
+    <string name="usernameTV">Username</string>
+    <string name="passwordTV">Password</string>
+
+    <!--HINTS-->
+    <string name="usernameHint">username</string>
+    <string name="passwordHint">password</string>
+
+    <!--CONTENT DESCRIPTIONS-->
+    <string name="appLogoCD">AAA Communications Logo</string>
 </resources>
