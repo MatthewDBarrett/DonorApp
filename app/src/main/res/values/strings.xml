@@ -8,6 +8,7 @@
     <!--TEXT VIEWS-->
     <string name="usernameTV">Username</string>
     <string name="passwordTV">Password</string>
+    <string name="homePageTV">Home Page</string>
 
     <!--HINTS-->
     <string name="usernameHint">username</string>
