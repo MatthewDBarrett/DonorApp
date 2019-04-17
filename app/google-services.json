@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "896517719295",
+    "firebase_url": "https://ses1a-booking-donor-app.firebaseio.com",
+    "project_id": "ses1a-booking-donor-app",
+    "storage_bucket": "ses1a-booking-donor-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896517719295:android:b59b6bc1e1f65ed6",
+        "android_client_info": {
+          "package_name": "com.example.donorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "896517719295-ke1nnera0q8s2ie68bvmbd7vli3cq4h0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.donorapp",
+            "certificate_hash": "2570288182f05f1553923be6ae06b9a077191f57"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_dNjPmnvrgfg4XnQE1C15OLpT1BpZs6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "896517719295-pm6onfl72r34ial5m36japmcnd6brgg3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
