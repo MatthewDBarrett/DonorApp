@@ -3,11 +3,11 @@ package com.example.donorapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class registrationUI extends AppCompatActivity {
+public class RegistrationPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration_ui);
+        setContentView(R.layout.activity_registration_page);
     }
 }
