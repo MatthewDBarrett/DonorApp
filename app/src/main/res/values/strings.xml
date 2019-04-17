@@ -11,6 +11,9 @@
     <string name="homePageTV">Home Page</string>
 
     <!--HINTS-->
+    <string name="firstNameHT">First Name:</string>
+
+    <!--HINTS-->
     <string name="usernameHint">username</string>
     <string name="passwordHint">password</string>
 
