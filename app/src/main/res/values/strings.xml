@@ -4,6 +4,8 @@
     <!--BUTTONS-->
     <string name="loginBtn">Login</string>
     <string name="registerBtn">Register</string>
+    <string name="donorBtn">Donor</string>
+    <string name="charityBtn">Charity</string>
 
     <!--TEXT VIEWS-->
     <string name="usernameTV">Username</string>
@@ -12,6 +14,15 @@
 
     <!--HINTS-->
     <string name="firstNameHT">First Name:</string>
+    <string name="lastNameHT">Last Name:</string>
+    <string name="postcodeHT">Postcode:</string>
+    <string name="organisationNameHT">Organisation Name:</string>
+    <string name="streetNameHT">Street Name:</string>
+    <string name="suburbHT">Suburb:</string>
+    <string name="phoneHT">Phone:</string>
+    <string name="emailOptInHT">Email(Opt in):</string>
+    <string name="passwordHT">Password:</string>
+    <string name="confirmPasswordHT">Confirm Password:</string>
 
     <!--HINTS-->
     <string name="usernameHint">username</string>

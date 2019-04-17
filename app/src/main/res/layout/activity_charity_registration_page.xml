@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/PhoneET"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CharityRegistrationPage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="@string/charityBtn"/> <!--Charity title-->
+
+        <EditText
+            android:id="@+id/firstnameET"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/firstNameHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="98dp"
+            tools:layout_editor_absoluteY="16dp" /> <!--First Name-->
+
+        <EditText
+            android:id="@+id/lastnameET"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/lastNameHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="61dp" /> <!--Last Name-->
+
+        <EditText
+            android:id="@+id/postcodeET"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/postcodeHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="135dp" /> <!--Post Code-->
+
+        <EditText
+            android:id="@+id/organisationnameET"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/organisationNameHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="347dp" /> <!--Organisation Name-->
+
+        <EditText
+            android:id="@+id/streetnameET"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/streetNameHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="391dp" /> <!--Street Name-->
+
+        <EditText
+            android:id="@+id/suburbET"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/suburbHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="436dp" /> <!--Suburb-->
+
+        <EditText
+            android:id="@+id/postcodeET2"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/postcodeHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="480dp" /> <!--Postcode-->
+
+        <EditText
+            android:id="@+id/phoneET"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="phone"
+            android:hint="@string/phoneHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="98dp" /> <!--Phone-->
+
+        <EditText
+            android:id="@+id/emailoptinET"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="@string/emailOptInHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="172dp" /> <!--Email-->
+
+        <EditText
+            android:id="@+id/passwordET"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="@string/passwordHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="98dp"
+            tools:layout_editor_absoluteY="209dp" /> <!--Password-->
+
+        <EditText
+            android:id="@+id/confirmpasswordET"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/confirmPasswordHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="98dp"
+            tools:layout_editor_absoluteY="253dp" /> <!--Confirm Password-->
+
+        <EditText
+            android:id="@+id/phoneET2"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="phone"
+            android:hint="@string/phoneHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="525dp" /> <!--Phone-->
+
+        <EditText
+            android:id="@+id/emailoptinET2"
+            android:importantForAutofill="no"
+            tools:ignore="LabelFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="@string/emailOptInHT"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="562dp" /> <!--Email-->
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
