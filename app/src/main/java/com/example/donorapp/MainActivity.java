@@ -1,6 +1,7 @@
 package com.example.donorapp;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -9,7 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,13 +44,40 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, both, Toast.LENGTH_SHORT).show();
 
                 //CODE TO AUTHENTICATE LOGIN DETAILS
+                logIn(user, pass);
 
-                Intent intent = new Intent(MainActivity.this, HomePage.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, HomePage.class);
+//                startActivity(intent);
             }
         });
 
     }
+
+    public void logIn(String username, String password)
+    {
+        if (username.isEmpty() || password.isEmpty())
+        {
+            Toast.makeText(this, "The username and password fields are required.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final Intent intent = new Intent(this, RegistrationPage.class); // HomePage.class);
+
+        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful())
+                {
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(MainActivity.this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 
     @Override
     public void onStart() {
