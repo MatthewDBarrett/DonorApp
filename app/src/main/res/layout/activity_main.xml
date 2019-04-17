@@ -18,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.2"
-            android:orientation="horizontal"></LinearLayout> <!--PADDING-->
+            android:orientation="horizontal">
+        </LinearLayout> <!--PADDING-->
 
         <ImageView
             android:id="@+id/imageView"
@@ -35,10 +36,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
-            android:orientation="horizontal"></LinearLayout> <!--PADDING-->
+            android:orientation="horizontal">
+        </LinearLayout> <!--PADDING-->
 
         <EditText
             android:id="@+id/usernameET"
+            android:importantForAutofill="no"
             android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -94,12 +97,40 @@
             </RelativeLayout>
         </android.support.v7.widget.CardView> <!--login button-->
 
+        <android.support.v7.widget.CardView
+            android:id="@+id/registrationCV"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="@color/lightBlue"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null">
+
+                <TextView
+                    android:id="@+id/registrationButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@null"
+                    android:text="@string/registerBtn"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView> <!--login button-->
+
         <LinearLayout
             android:id="@+id/padding4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal"></LinearLayout> <!--PADDING-->
+            android:orientation="horizontal">
+        </LinearLayout> <!--PADDING-->
 
     </LinearLayout> <!--logo, username, password and login button-->
 
