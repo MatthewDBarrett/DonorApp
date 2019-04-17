@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //CODE TO AUTHENTICATE LOGIN DETAILS
 
-                Intent intent = new Intent(MainActivity.this, HomePage.class);
+                Intent intent = new Intent(MainActivity.this, RegistrationPage.class);
                 startActivity(intent);
             }
         });
