@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     CardView loginBtn;
+    CardView registrationBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         username = findViewById(R.id.usernameET);
         password = findViewById(R.id.passwordET);
         loginBtn = findViewById(R.id.loginCV);
+        registrationBtn = findViewById(R.id.registrationCV);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +50,22 @@ public class MainActivity extends AppCompatActivity {
 
 //                Intent intent = new Intent(MainActivity.this, HomePage.class);
 //                startActivity(intent);
+            }
+        });
+
+        registrationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String user = String.valueOf( username.getText() );
+                String pass = String.valueOf( password.getText() );
+                String both = "Username: " + user + " Password: " + pass;
+                Toast.makeText(MainActivity.this, both, Toast.LENGTH_SHORT).show();
+
+                //CODE TO AUTHENTICATE LOGIN DETAILS
+
+                Intent intent = new Intent(MainActivity.this, RegistrationPage.class);
+                startActivity(intent);
             }
         });
 
