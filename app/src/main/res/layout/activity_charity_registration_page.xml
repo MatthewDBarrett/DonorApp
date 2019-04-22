@@ -10,182 +10,170 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="-25dp"
+        tools:layout_editor_absoluteY="463dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:text="@string/charityBtn"/> <!--Charity title-->
+            android:text="@string/charityBtn"
+            android:textSize="30sp" /> <!--Charity title-->
 
-        <EditText
-            android:id="@+id/firstnameET"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="@string/firstNameHT"
-            android:textSize="12sp"
-            tools:layout_editor_absoluteX="98dp"
-            tools:layout_editor_absoluteY="16dp" /> <!--First Name-->
+        <!--First Name-->
 
         <EditText
             android:id="@+id/lastnameET"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="@string/lastNameHT"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:text="@string/first_name"
             android:textSize="12sp"
+            tools:ignore="LabelFor"
             tools:layout_editor_absoluteX="99dp"
             tools:layout_editor_absoluteY="61dp" /> <!--Last Name-->
 
         <EditText
             android:id="@+id/postcodeET"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number"
             android:hint="@string/postcodeHT"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:text="@string/last_name"
             android:textSize="12sp"
+            tools:ignore="LabelFor"
             tools:layout_editor_absoluteX="99dp"
             tools:layout_editor_absoluteY="135dp" /> <!--Post Code-->
 
         <EditText
-            android:id="@+id/organisationnameET"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
+            android:id="@+id/phoneET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="@string/organisationNameHT"
+            android:hint="@string/phoneHT"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            android:text="@string/job_title"
             android:textSize="12sp"
+            tools:ignore="LabelFor"
+            tools:layout_editor_absoluteX="99dp"
+            tools:layout_editor_absoluteY="98dp" />
+
+        <EditText
+            android:id="@+id/organisationnameET"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/organisationNameHT"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:text="@string/company_name"
+            android:textSize="12sp"
+            tools:ignore="LabelFor"
             tools:layout_editor_absoluteX="99dp"
             tools:layout_editor_absoluteY="347dp" /> <!--Organisation Name-->
 
         <EditText
             android:id="@+id/streetnameET"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="@string/streetNameHT"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:text="@string/company_address"
             android:textSize="12sp"
+            tools:ignore="LabelFor"
             tools:layout_editor_absoluteX="99dp"
             tools:layout_editor_absoluteY="391dp" /> <!--Street Name-->
 
         <EditText
             android:id="@+id/suburbET"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="@string/suburbHT"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:text="@string/company_suburb"
             android:textSize="12sp"
+            tools:ignore="LabelFor"
             tools:layout_editor_absoluteX="99dp"
             tools:layout_editor_absoluteY="436dp" /> <!--Suburb-->
 
         <EditText
             android:id="@+id/postcodeET2"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number"
             android:hint="@string/postcodeHT"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:text="@string/company_postcode"
             android:textSize="12sp"
+            tools:ignore="LabelFor"
             tools:layout_editor_absoluteX="99dp"
             tools:layout_editor_absoluteY="480dp" /> <!--Postcode-->
 
-        <EditText
-            android:id="@+id/phoneET"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone"
-            android:hint="@string/phoneHT"
-            android:textSize="12sp"
-            tools:layout_editor_absoluteX="99dp"
-            tools:layout_editor_absoluteY="98dp" /> <!--Phone-->
+        <!--Phone-->
 
         <EditText
             android:id="@+id/emailoptinET"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textEmailAddress"
             android:hint="@string/emailOptInHT"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:text="@string/email_address"
             android:textSize="12sp"
+            tools:ignore="LabelFor"
             tools:layout_editor_absoluteX="99dp"
             tools:layout_editor_absoluteY="172dp" /> <!--Email-->
 
         <EditText
             android:id="@+id/passwordET"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="@string/password"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:hint="@string/passwordHT"
             android:textSize="12sp"
+            tools:ignore="LabelFor"
             tools:layout_editor_absoluteX="98dp"
             tools:layout_editor_absoluteY="209dp" /> <!--Password-->
 
         <EditText
             android:id="@+id/confirmpasswordET"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="@string/confirmPasswordHT"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:text="@string/confirm_password"
             android:textSize="12sp"
+            tools:ignore="LabelFor"
             tools:layout_editor_absoluteX="98dp"
-            tools:layout_editor_absoluteY="253dp" /> <!--Confirm Password-->
+            tools:layout_editor_absoluteY="253dp" />
 
-        <EditText
-            android:id="@+id/phoneET2"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="196dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone"
-            android:hint="@string/phoneHT"
-            android:textSize="12sp"
-            tools:layout_editor_absoluteX="99dp"
-            tools:layout_editor_absoluteY="525dp" /> <!--Phone-->
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/ok" /> <!--Confirm Password-->
 
-        <EditText
-            android:id="@+id/emailoptinET2"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:hint="@string/emailOptInHT"
-            android:textSize="12sp"
-            tools:layout_editor_absoluteX="99dp"
-            tools:layout_editor_absoluteY="562dp" /> <!--Email-->
+        <!--Phone-->
+
+        <!--Email-->
 
     </LinearLayout>
 

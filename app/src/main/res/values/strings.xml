@@ -30,4 +30,15 @@
 
     <!--CONTENT DESCRIPTIONS-->
     <string name="appLogoCD">AAA Communications Logo</string>
+    <string name="first_name">First Name:</string>
+    <string name="company_name">Company Name:</string>
+    <string name="last_name">Last Name:</string>
+    <string name="company_address">Company Address:</string>
+    <string name="company_suburb">Company Suburb:</string>
+    <string name="company_postcode">Company Postcode:</string>
+    <string name="job_title">Job Title:</string>
+    <string name="email_address">Email Address:</string>
+    <string name="password">Password:</string>
+    <string name="confirm_password">Confirm Password:</string>
+    <string name="ok">OK</string>
 </resources>
