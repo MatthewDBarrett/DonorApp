@@ -31,7 +31,7 @@
             tools:ignore="LabelFor"/> <!--Organisation Name-->
 
         <EditText
-            android:id="@+id/streetNameET"
+            android:id="@+id/streetET"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:hint="@string/streetHT"
@@ -93,7 +93,7 @@
             tools:ignore="LabelFor"/> <!--Confirm Password-->
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/submitBtn"
             android:layout_width="196dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
