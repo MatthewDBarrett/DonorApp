@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/PhoneET"
     android:layout_width="match_parent"
@@ -12,105 +11,66 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/donorBtn"
-            android:textSize="30sp" /> <!--Donor Title-->
+            android:layout_marginBottom="20dp"
+            android:text="@string/donorRegTV"
+            android:textColor="@color/white"
+            android:textSize="36sp" /> <!--Donor Title-->
 
         <EditText
-            android:id="@+id/firstnameET"
-            android:layout_width="wrap_content"
+            android:id="@+id/firstNameET"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="@string/firstNameHT"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
-            android:textSize="12sp"
-            tools:ignore="LabelFor"
-            tools:layout_editor_absoluteX="98dp"
-            tools:layout_editor_absoluteY="16dp" /> <!--First Name-->
+            android:textSize="20sp"
+            tools:ignore="LabelFor"/> <!--First Name-->
 
         <EditText
-            android:id="@+id/lastnameET"
-            android:layout_width="wrap_content"
+            android:id="@+id/lastNameET"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="@string/lastNameHT"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
-            android:textSize="12sp"
-            tools:ignore="LabelFor"
-            tools:layout_editor_absoluteX="99dp"
-            tools:layout_editor_absoluteY="61dp" /> <!--Last Name-->
-
-        <!--Post Code-->
-
-        <!--Organisation Name-->
-
-        <!--Street Name-->
-
-        <!--Suburb-->
-
-        <!--Postcode-->
+            android:textSize="20sp"
+            tools:ignore="LabelFor"/> <!--Last Name-->
 
         <EditText
-            android:id="@+id/emailoptinET"
-            android:layout_width="wrap_content"
+            android:id="@+id/emailET"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/emailOptInHT"
+            android:hint="@string/emailHT"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
-            android:textSize="12sp"
-            tools:ignore="LabelFor"
-            tools:layout_editor_absoluteX="99dp"
-            tools:layout_editor_absoluteY="172dp" />
-
-        <EditText
-            android:id="@+id/phoneET"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/phoneHT"
-            android:importantForAutofill="no"
-            android:inputType="phone"
-            android:textSize="12sp"
-            tools:ignore="LabelFor"
-            tools:layout_editor_absoluteX="99dp"
-            tools:layout_editor_absoluteY="98dp" /> <!--Phone-->
-
-        <!--Email-->
+            android:textSize="20sp"
+            tools:ignore="LabelFor"/> <!--Email-->
 
         <EditText
             android:id="@+id/passwordET"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="@string/passwordHT"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:textSize="12sp"
-            tools:ignore="LabelFor"
-            tools:layout_editor_absoluteX="98dp"
-            tools:layout_editor_absoluteY="209dp" /> <!--Password-->
+            android:textSize="20sp"
+            tools:ignore="LabelFor"/> <!--Password-->
 
         <EditText
-            android:id="@+id/confirmpasswordET"
-            android:layout_width="wrap_content"
+            android:id="@+id/confirmPasswordET"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/confirmPasswordHT"
             android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:textSize="12sp"
-            tools:ignore="LabelFor"
-            tools:layout_editor_absoluteX="98dp"
-            tools:layout_editor_absoluteY="253dp" />
+            android:inputType="textPassword"
+            android:textSize="20sp"
+            tools:ignore="LabelFor"/> <!--Confirm Password-->
 
         <Button
             android:id="@+id/button"
@@ -118,14 +78,9 @@
             android:layout_height="44dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@string/ok" />
-
-        <!--Confirm Password-->
-
-        <!--Phone-->
-
-        <!--Email-->
-
+            android:layout_marginTop="40dp"
+            android:background="@color/colorAltAccent"
+            android:text="@string/submitBtn"/> <!--Submit Button-->
 
     </LinearLayout>
 
