@@ -37,6 +37,14 @@ public class CharityRegistrationPage extends AppCompatActivity {
             public void onClick(View view) {
 
             String organisationName = String.valueOf( orgName.getText() );
+            String streetName = String.valueOf( street.getText());
+            String suburbName = String.valueOf(suburb.getText());
+            String postcodeNumber = String.valueOf(postcode.getText());
+            String emailAddress = String.valueOf(email.getText());
+            String passwordDetails = String.valueOf(password.getText());
+            String confirmPasswordDetails = String.valueOf(confirmPassword.getText());
+
+
 
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
