@@ -45,4 +45,3 @@ public class DonorRegistrationPage extends AppCompatActivity {
 
     }
 }
-    
