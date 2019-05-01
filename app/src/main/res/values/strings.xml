@@ -4,14 +4,27 @@
     <!--BUTTONS-->
     <string name="loginBtn">Login</string>
     <string name="registerBtn">Register</string>
+    <string name="donorBtn">Donor</string>
+    <string name="charityBtn">Charity</string>
+    <string name="submitBtn">Submit</string>
 
     <!--TEXT VIEWS-->
     <string name="usernameTV">Username</string>
     <string name="passwordTV">Password</string>
     <string name="homePageTV">Home Page</string>
+    <string name="charityRegTV">Charity Registration</string>
+    <string name="donorRegTV">Donor Registration</string>
 
     <!--HINTS-->
     <string name="firstNameHT">First Name:</string>
+    <string name="lastNameHT">Last Name:</string>
+    <string name="postcodeHT">Postcode:</string>
+    <string name="organisationNameHT">Organisation Name:</string>
+    <string name="streetHT">Street:</string>
+    <string name="suburbHT">Suburb:</string>
+    <string name="emailHT">Email:</string>
+    <string name="passwordHT">Password:</string>
+    <string name="confirmPasswordHT">Confirm Password:</string>
 
     <!--HINTS-->
     <string name="usernameHint">username</string>
@@ -19,4 +32,15 @@
 
     <!--CONTENT DESCRIPTIONS-->
     <string name="appLogoCD">AAA Communications Logo</string>
+    <string name="first_name">First Name:</string>
+    <string name="company_name">Company Name:</string>
+    <string name="last_name">Last Name:</string>
+    <string name="company_address">Company Address:</string>
+    <string name="company_suburb">Company Suburb:</string>
+    <string name="company_postcode">Company Postcode:</string>
+    <string name="job_title">Job Title:</string>
+    <string name="email_address">Email Address:</string>
+    <string name="password">Password:</string>
+    <string name="confirm_password">Confirm Password:</string>
+
 </resources>

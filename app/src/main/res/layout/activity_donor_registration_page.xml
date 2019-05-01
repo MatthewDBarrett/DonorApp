@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/PhoneET"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DonorRegistrationPage">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/donorRegTV"
+            android:textColor="@color/white"
+            android:textSize="36sp" /> <!--Donor Title-->
+
+        <EditText
+            android:id="@+id/firstNameET"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/firstNameHT"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textSize="20sp"
+            tools:ignore="LabelFor"/> <!--First Name-->
+
+        <EditText
+            android:id="@+id/lastNameET"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/lastNameHT"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textSize="20sp"
+            tools:ignore="LabelFor"/> <!--Last Name-->
+
+        <EditText
+            android:id="@+id/emailET"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/emailHT"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textSize="20sp"
+            tools:ignore="LabelFor"/> <!--Email-->
+
+        <EditText
+            android:id="@+id/passwordET"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/passwordHT"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textSize="20sp"
+            tools:ignore="LabelFor"/> <!--Password-->
+
+        <EditText
+            android:id="@+id/confirmPasswordET"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/confirmPasswordHT"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textSize="20sp"
+            tools:ignore="LabelFor"/> <!--Confirm Password-->
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="176dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorAltAccent"
+            android:text="@string/submitBtn"/> <!--Submit Button-->
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
