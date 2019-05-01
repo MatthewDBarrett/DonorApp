@@ -30,18 +30,20 @@ public class DonorRegistrationPage extends AppCompatActivity {
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view){
 
-                String firstNameDetails = String.valueOf(firstName.getText() );
-                String lastNameDetails =  String.valueOf(lastName.getText() );
-                String emailAddress = String.valueOf(email.getText() );
+                String firstNameDetails = String.valueOf(firstName.getText());
+                String lastNameDetails = String.valueOf(lastName.getText());
+                String emailAddress = String.valueOf(email.getText());
                 String passwordDetails = String.valueOf(password.getText());
-                String confirmPasswordDetails = String.valueOf(confirmPassword.getText() );
-
+                String confirmPasswordDetails = String.valueOf(confirmPassword.getText());
 
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
 
+
+            }
+        });
     }
 }
