@@ -1,10 +1,12 @@
 package com.example.donorapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,6 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,10 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class CharityRegistrationPage extends AppCompatActivity {
-
-
-   // private FirebaseDatabase database =  FirebaseDatabase.getInstance();
-    private DatabaseReference database;
+    DatabaseReference charityDatabase;
+    FirebaseAuth firebaseAuth;
 
     ArrayList<String> list = new ArrayList<>();
 
@@ -43,6 +47,9 @@ public class CharityRegistrationPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charity_registration_page);
 
+        charityDatabase = FirebaseDatabase.getInstance().getReference("Charities");
+        firebaseAuth = FirebaseAuth.getInstance();
+
         submit = findViewById(R.id.submitBtn);
         orgName = findViewById(R.id.organisationNameET);
         street = findViewById(R.id.streetET);
@@ -52,130 +59,77 @@ public class CharityRegistrationPage extends AppCompatActivity {
         password = findViewById(R.id.passwordET);
         confirmPassword = findViewById(R.id.confirmPasswordET);
 
-        database = FirebaseDatabase.getInstance().getReference("Charities");
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-            String organisationName = String.valueOf( orgName.getText() );
-            String streetName = String.valueOf( street.getText());
+            submit.setEnabled(false);
+            String organisationName = String.valueOf(orgName.getText());
+            String streetName = String.valueOf(street.getText());
             String suburbName = String.valueOf(suburb.getText());
             String postcodeNumber = String.valueOf(postcode.getText());
             String emailAddress = String.valueOf(email.getText());
             String passwordDetails = String.valueOf(password.getText());
             String confirmPasswordDetails = String.valueOf(confirmPassword.getText());
 
-
-
-
-
-
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-
-
-
-            storeData();
-
-
-
-
+            if (organisationName.isEmpty() || streetName.isEmpty() || suburbName.isEmpty() || postcodeNumber.isEmpty() || emailAddress.isEmpty() || passwordDetails.isEmpty() || confirmPasswordDetails.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "All fields are required!", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if (!passwordDetails.equals(confirmPasswordDetails)) {
+                Toast.makeText(getApplicationContext(), "Password confirmation does not match!", Toast.LENGTH_LONG).show();
+                return;
+            }
+            registerUser(emailAddress, passwordDetails);
             }
         });
-
-       /* submit.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-
-
-            }
-
-        });
-        */
-
-
     }
 
-//    public boolean checkRequiredField() {
-//        String organisationName = String.valueOf( orgName.getText() );
-//        String emailText = String.valueOf(email.getText());
+    void registerUser(String email, String password) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(
+                this,
+                new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            String userID = firebaseAuth.getUid();
+                            storeData(userID);
+                            new AlertDialog.Builder(CharityRegistrationPage.this)
+                                    .setTitle("Registration Successful")
+                                    .setMessage("You may now log in.")
+                                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    })
+                                    .show();
 
-
-//           if (!organisationName.equals("") &&
-//            !emailText.equals("") &&
-//            !organisationName.equals("") &&
-//        ) return true;
-//        return false;
-//    }
-
-
-/*
-    @Override
-    protected void onStart(){
-        super.onStart();
-        database.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String details = dataSnapshot.getValue(String.class);
-                // Log.d(TAG, "Value is: " + details);
-                // rootReference.setValue("Charity Data");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                // Log.w(TAG,"Failed to read value", databaseError.toException());
-
-            }
-
-        });
-
-    }  */
-
-
-
-    private void storeData(){
-
-        String id = database.push().getKey();
-
-        DatabaseReference currentCharityId = database.child(id);
-        currentCharityId.child("orgName").setValue(orgName.getText().toString().trim());
-        currentCharityId.child("email").setValue(email.getText().toString().trim());
-        currentCharityId.child("postcode").setValue(postcode.getText().toString().trim());
-        currentCharityId.child("street").setValue(street.getText().toString().trim());
-        currentCharityId.child("password").setValue(password.getText().toString().trim());
-        currentCharityId.child("suburb").setValue(suburb.getText().toString().trim());
-
-
-
-            // SharedPreferences preferences = getSharedPreferences("preferences", );
-
-
-        }
-
-
-
-  /*  private void addCharity(){
-
-
-
-
-        if(!TextUtils.isEmpty("")){
-
-
-          }
-
-        else{
-
-            Toast.makeText(this, "Data not added to databsae", Toast.LENGTH_LONG).show();
-
-        }
+                        } else {
+                            submit.setEnabled(true);
+                            String res = task.getException().getMessage();
+                            new AlertDialog.Builder(CharityRegistrationPage.this)
+                                    .setTitle("Registration Failed")
+                                    .setMessage(res)
+                                    .setNegativeButton("OK", null)
+                                    .show();
+                        }
+                    }
+                }
+            );
     }
-            */
 
+    private void storeData(String uID){
+        DatabaseReference currentCharityRef = charityDatabase.child(uID);
+        currentCharityRef.child("userType").setValue("charity");
+        currentCharityRef.child("orgName").setValue(orgName.getText().toString().trim());
+        currentCharityRef.child("email").setValue(email.getText().toString().trim());
+        currentCharityRef.child("postcode").setValue(postcode.getText().toString().trim());
+        currentCharityRef.child("street").setValue(street.getText().toString().trim());
+        currentCharityRef.child("suburb").setValue(suburb.getText().toString().trim());
+    }
 }
-
 
 
 

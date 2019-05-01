@@ -73,7 +73,7 @@
             tools:ignore="LabelFor"/> <!--Confirm Password-->
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/submitBtn"
             android:layout_width="176dp"
             android:layout_height="44dp"
             android:layout_marginStart="8dp"
