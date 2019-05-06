@@ -43,4 +43,10 @@
     <string name="password">Password:</string>
     <string name="confirm_password">Confirm Password:</string>
 
+    <!--SHARED PREFERENCES-->
+    <string name="donationPrefsString">donationAd</string>
+    <string name="imagePrefsString">imagePreferences</string>
+    <string name="currentDonationString">currentDonation</string>
+    <string name="numImagesString">numImages</string>
+
 </resources>

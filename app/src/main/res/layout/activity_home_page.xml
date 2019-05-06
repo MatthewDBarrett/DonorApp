@@ -19,6 +19,13 @@
             android:textColor="@color/black"
             android:text="@string/homePageTV"/>
 
+        <Button
+            android:id="@+id/donationAdBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/donationPrefsString"/>  <!--ONLY FOR TESTING PURPOSES-->
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
