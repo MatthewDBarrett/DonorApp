@@ -17,7 +17,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="315dp"
-                android:layout_height="560dp"
+                android:layout_height="420dp"
                 android:layout_gravity="center"
                 android:background="@drawable/box"
                 android:gravity="center"
@@ -40,7 +40,7 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout"
-                android:layout_width="315dp"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:background="@drawable/box"
