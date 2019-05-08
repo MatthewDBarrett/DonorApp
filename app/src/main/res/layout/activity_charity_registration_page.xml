@@ -58,6 +58,7 @@
             android:importantForAutofill="no"
             android:inputType="number"
             android:textSize="20sp"
+            android:maxLength="4"
             tools:ignore="LabelFor"/> <!--Postcode-->
 
         <EditText
