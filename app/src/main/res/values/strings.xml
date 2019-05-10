@@ -11,7 +11,7 @@
     <!--TEXT VIEWS-->
     <string name="usernameTV">Username</string>
     <string name="passwordTV">Password</string>
-    <string name="homePageTV">Home Page</string>
+    <string name="homePageTV">Donor App</string>
     <string name="charityRegTV">Charity Registration</string>
     <string name="donorRegTV">Donor Registration</string>
 
@@ -44,7 +44,7 @@
     <string name="confirm_password">Confirm Password:</string>
 
     <!--SHARED PREFERENCES-->
-    <string name="donationPrefsString">donationAd</string>
+    <string name="donationPrefsString">New Donation</string>
     <string name="imagePrefsString">imagePreferences</string>
     <string name="currentDonationString">currentDonation</string>
     <string name="numImagesString">numImages</string>

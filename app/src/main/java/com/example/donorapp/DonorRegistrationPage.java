@@ -41,7 +41,7 @@ public class DonorRegistrationPage extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        donorDatabase = firebaseDatabase.getReference("Donors");
+        donorDatabase = firebaseDatabase.getReference("Users");
 
         submit = findViewById(R.id.submitBtn);
         firstName = findViewById(R.id.firstNameET);
@@ -113,6 +113,6 @@ public class DonorRegistrationPage extends AppCompatActivity {
         currentUserRef.child("firstName").setValue(firstName.getText().toString().trim());
         currentUserRef.child("lastName").setValue(lastName.getText().toString().trim());
         currentUserRef.child("email").setValue(email.getText().toString().trim());
-
+        currentUserRef.child("userType").setValue("donor");
     }
 }

@@ -7,24 +7,44 @@
     android:background="@color/white"
     tools:context=".HomePage">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            android:text="@string/homePageTV"/>
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="20dp"
+            android:scrollbars="vertical"
+            tools:layout_editor_absoluteX="114dp"
+            tools:layout_editor_absoluteY="76dp" />
 
-        <Button
-            android:id="@+id/donationAdBtn"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="@string/donationPrefsString"/>  <!--ONLY FOR TESTING PURPOSES-->
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="@string/homePageTV"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/donationAdBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/donationPrefsString"/>  <!--ONLY FOR TESTING PURPOSES-->
+
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -47,7 +47,7 @@ public class CharityRegistrationPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charity_registration_page);
 
-        charityDatabase = FirebaseDatabase.getInstance().getReference("Charities");
+        charityDatabase = FirebaseDatabase.getInstance().getReference("Users");
         firebaseAuth = FirebaseAuth.getInstance();
 
         submit = findViewById(R.id.submitBtn);
