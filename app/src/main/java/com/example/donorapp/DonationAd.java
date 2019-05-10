@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,6 +38,9 @@ import java.util.Locale;
 
 public class DonationAd extends AppCompatActivity {
 
+    Button post;
+    EditText title;
+    EditText description;
     LinearLayout photosLL;
     ImageView img;
 
@@ -55,8 +59,18 @@ public class DonationAd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_ad);
 
+        post = findViewById(R.id.postBtn);
+        title = findViewById(R.id.titleET);
+        description = findViewById(R.id.descriptionET);
         photosLL = findViewById(R.id.photosLL);
         img = findViewById(R.id.imageView);
+
+        post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                post.setEnabled(false);
+                String title = String.valueOf(title.getText());
+                String description = String.valueOf(description.getText());
 
         setDonationNumber( 1 );
 

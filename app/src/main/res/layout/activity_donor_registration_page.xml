@@ -29,7 +29,7 @@
             android:importantForAutofill="no"
             android:inputType="textPersonName"
             android:textSize="20sp"
-            tools:ignore="LabelFor"/> <!--First Name-->
+            tools:ignore="LabelFor" /> <!--First Name-->
 
         <EditText
             android:id="@+id/lastNameET"
@@ -39,7 +39,7 @@
             android:importantForAutofill="no"
             android:inputType="textPersonName"
             android:textSize="20sp"
-            tools:ignore="LabelFor"/> <!--Last Name-->
+            tools:ignore="LabelFor" /> <!--Last Name-->
 
         <EditText
             android:id="@+id/emailET"
@@ -49,7 +49,7 @@
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:textSize="20sp"
-            tools:ignore="LabelFor"/> <!--Email-->
+            tools:ignore="LabelFor" /> <!--Email-->
 
         <EditText
             android:id="@+id/passwordET"
@@ -59,7 +59,7 @@
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:textSize="20sp"
-            tools:ignore="LabelFor"/> <!--Password-->
+            tools:ignore="LabelFor" /> <!--Password-->
 
         <EditText
             android:id="@+id/confirmPasswordET"
@@ -70,17 +70,17 @@
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:textSize="20sp"
-            tools:ignore="LabelFor"/> <!--Confirm Password-->
+            tools:ignore="LabelFor" /> <!--Confirm Password-->
 
         <Button
             android:id="@+id/submitBtn"
             android:layout_width="176dp"
             android:layout_height="44dp"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
             android:background="@color/colorAltAccent"
-            android:text="@string/submitBtn"/> <!--Submit Button-->
+            android:text="@string/submitBtn" /> <!--Submit Button-->
 
     </LinearLayout>
 
