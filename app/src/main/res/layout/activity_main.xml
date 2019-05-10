@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".LoginPage">
 
         <LinearLayout
             android:id="@+id/padding"

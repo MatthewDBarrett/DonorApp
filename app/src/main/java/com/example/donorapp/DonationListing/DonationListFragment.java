@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.donorapp.MainActivity;
+import com.example.donorapp.LoginPage;
 import com.example.donorapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -93,7 +93,7 @@ public class DonationListFragment extends Fragment {
         if (currentFirebaseUser == null)
         {
             // Return user to log in if they are not authenticated
-            Intent intent = new Intent(getContext(), MainActivity.class);
+            Intent intent = new Intent(getContext(), LoginPage.class);
             startActivity(intent);
         }
         String userUid = currentFirebaseUser.getUid();
