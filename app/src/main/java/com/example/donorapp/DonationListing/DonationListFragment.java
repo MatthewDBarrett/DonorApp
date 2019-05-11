@@ -116,23 +116,25 @@ public class DonationListFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String usrType = dataSnapshot.getValue(String.class);
-                if (usrType.equals("donor")) {
-                    try {
-                        dbRef.child("Users")
-                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .child("donations").addValueEventListener(
+                if (usrType != null) {
+                    if (usrType.equals("donor")) {
+                        try {
+                            dbRef.child("Users")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child("donations").addValueEventListener(
+                                    donationListener
+                            );
+                        } catch (Exception e) {
+                            Log.d("DonationListing", "No donations found, empty list.");
+                            mDonationList.clear();
+                        }
+                    } else if (usrType.equals("charity")) {
+                        dbRef.child("Donations").addValueEventListener(
                                 donationListener
                         );
-                    } catch (Exception e) {
-                        Log.d("DonationListing", "No donations found, empty list.");
-                        mDonationList.clear();
+                    } else {
+                        Log.e("DonationListing", "Got an unexpected user type: " + usrType);
                     }
-                } else if (usrType.equals("charity")) {
-                    dbRef.child("Donations").addValueEventListener(
-                            donationListener
-                    );
-                } else {
-                    Log.e("DonationListing", "Got an unexpected user type: " + usrType);
                 }
             }
 

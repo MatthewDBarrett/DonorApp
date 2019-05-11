@@ -69,8 +69,9 @@ public class DonationAd extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 post.setEnabled(false);
-                String title = String.valueOf(title.getText());
-                String description = String.valueOf(description.getText());
+
+            }
+        });
 
         setDonationNumber( 1 );
 
