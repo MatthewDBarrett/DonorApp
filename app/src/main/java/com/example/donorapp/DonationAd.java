@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -43,6 +44,10 @@ public class DonationAd extends AppCompatActivity {
     LinearLayout photosLL;
     ImageView img;
 
+    ImageButton newDonation;
+    ImageButton booking;
+    ImageButton home;
+
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
 
     private static int RESULT_LOAD_IMAGE = 1;
@@ -57,6 +62,34 @@ public class DonationAd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_ad);
+
+        newDonation = findViewById(R.id.newDonationBtn);
+        booking = findViewById(R.id.bookingBtn);
+        home = findViewById(R.id.homeBtn);
+
+        booking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
+                startActivity(intent);
+            }
+        });
+
+        newDonation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DonationAd.class);
+                startActivity(intent);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                startActivity(intent);
+            }
+        });
 
         post = findViewById(R.id.postBtn);
         title = findViewById(R.id.titleET);

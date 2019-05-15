@@ -7,12 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.support.v7.widget.Toolbar;
+import android.widget.ImageButton;
 
 import com.example.donorapp.DonationListing.DonationListFragment;
 
 public class HomePage extends AppCompatActivity {
 
-    Button donAd;
+    ImageButton newDonation;
+    ImageButton booking;
+    ImageButton home;
     private FragmentManager fragmentManager;
 
 
@@ -21,12 +25,33 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        donAd = findViewById(R.id.donationAdBtn);
+        newDonation = findViewById(R.id.newDonationBtn);
+        booking = findViewById(R.id.bookingBtn);
+        home = findViewById(R.id.homeBtn);
 
-        donAd.setOnClickListener(new View.OnClickListener() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        booking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
+                startActivity(intent);
+            }
+        });
+
+        newDonation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DonationAd.class);
+                startActivity(intent);
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), HomePage.class);
                 startActivity(intent);
             }
         });
