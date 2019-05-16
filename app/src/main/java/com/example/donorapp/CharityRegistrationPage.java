@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,36 +79,58 @@ public class CharityRegistrationPage extends AppCompatActivity {
     }
 
     void registerUser(String email, String password) {
+        final String emailTmp = email;
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(
                 this,
                 new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            String userID = firebaseAuth.getUid();
-                            storeData(userID);
-                            new AlertDialog.Builder(CharityRegistrationPage.this)
-                                    .setTitle("Registration Successful")
-                                    .setMessage("You may now log in.")
-                                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            Intent intent = new Intent(getApplicationContext(), LoginPage.class);
-                                            startActivity(intent);
-                                        }
-                                    })
-                                    .show();
+                if (task.isSuccessful()) {
+                    String userID = firebaseAuth.getUid();
+                    storeData(userID);
+                    firebaseAuth.getCurrentUser().sendEmailVerification()
+                        .addOnCompleteListener(CharityRegistrationPage.this, new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                if (task.isSuccessful()) {
+                                    new AlertDialog.Builder(CharityRegistrationPage.this)
+                                            .setTitle("Verification Needed")
+                                            .setMessage("We've sent a verification email to " + emailTmp + ".")
+                                            .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    Intent intent = new Intent(getApplicationContext(), LoginPage.class);
+                                                    startActivity(intent);
+                                                }
+                                            })
+                                            .show();
 
-                        } else {
-                            submit.setEnabled(true);
-                            String res = task.getException().getMessage();
-                            new AlertDialog.Builder(CharityRegistrationPage.this)
-                                    .setTitle("Registration Failed")
-                                    .setMessage(res)
-                                    .setNegativeButton("OK", null)
-                                    .show();
-                        }
+                                } else {
+                                    new AlertDialog.Builder(CharityRegistrationPage.this)
+                                            .setTitle("Verification Needed")
+                                            .setMessage("Please log in with this account.")
+                                            .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    Intent intent = new Intent(getApplicationContext(), LoginPage.class);
+                                                    startActivity(intent);
+                                                }
+                                            })
+                                            .show();
+                                }
+                            }
+                        });
+
+                } else {
+                    submit.setEnabled(true);
+                    String res = task.getException().getMessage();
+                    new AlertDialog.Builder(CharityRegistrationPage.this)
+                            .setTitle("Registration Failed")
+                            .setMessage(res)
+                            .setNegativeButton("OK", null)
+                            .show();
+                }
                     }
                 }
             );

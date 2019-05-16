@@ -71,6 +71,7 @@ public class DonorRegistrationPage extends AppCompatActivity {
     }
 
     void registerUser(String email, String password) {
+        final String emailTmp = email;
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(
                 this,
@@ -80,17 +81,38 @@ public class DonorRegistrationPage extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             String userID = firebaseAuth.getUid();
                             uploadData(userID);
-                            new AlertDialog.Builder(DonorRegistrationPage.this)
-                                    .setTitle("Registration Successful")
-                                    .setMessage("You may now log in.")
-                                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            firebaseAuth.getCurrentUser().sendEmailVerification()
+                                    .addOnCompleteListener(DonorRegistrationPage.this, new OnCompleteListener() {
                                         @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            Intent intent = new Intent(getApplicationContext(), LoginPage.class);
-                                            startActivity(intent);
+                                        public void onComplete(@NonNull Task task) {
+                                            if (task.isSuccessful()) {
+                                                new AlertDialog.Builder(DonorRegistrationPage.this)
+                                                        .setTitle("Verification Needed")
+                                                        .setMessage("We've sent a verification email to " + emailTmp + ".")
+                                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                Intent intent = new Intent(getApplicationContext(), LoginPage.class);
+                                                                startActivity(intent);
+                                                            }
+                                                        })
+                                                        .show();
+
+                                            } else {
+                                                new AlertDialog.Builder(DonorRegistrationPage.this)
+                                                        .setTitle("Verification Needed")
+                                                        .setMessage("Please log in with this account.")
+                                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                Intent intent = new Intent(getApplicationContext(), LoginPage.class);
+                                                                startActivity(intent);
+                                                            }
+                                                        })
+                                                        .show();
+                                            }
                                         }
-                                    })
-                                    .show();
+                                    });
                         } else {
                             submit.setEnabled(true);
                             String res = task.getException().getMessage();

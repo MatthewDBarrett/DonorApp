@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -65,7 +66,44 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    startActivity(intent);
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    if (user.isEmailVerified()) {
+                        startActivity(intent);
+                    }
+                    else {
+                        mAuth.getCurrentUser().sendEmailVerification()
+                            .addOnCompleteListener(LoginPage.this, new OnCompleteListener() {
+                                @Override
+                                public void onComplete(@NonNull Task task) {
+                                    if (task.isSuccessful()) {
+                                        new AlertDialog.Builder(LoginPage.this)
+                                                .setTitle("Verification Needed")
+                                                .setMessage("We've sent a verification email to your account.")
+                                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        Intent intent = new Intent(getApplicationContext(), LoginPage.class);
+                                                        startActivity(intent);
+                                                    }
+                                                })
+                                                .show();
+
+                                    } else {
+                                        new AlertDialog.Builder(LoginPage.this)
+                                                .setTitle("Verification Needed")
+                                                .setMessage("Please check your email.")
+                                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        Intent intent = new Intent(getApplicationContext(), LoginPage.class);
+                                                        startActivity(intent);
+                                                    }
+                                                })
+                                                .show();
+                                    }
+                                }
+                            });
+                    }
                 } else {
                     Toast.makeText(LoginPage.this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
                 }
