@@ -8,6 +8,7 @@
     <string name="charityBtn">Charity</string>
     <string name="submitBtn">Submit</string>
     <string name="postBtn">Post</string>
+    <string name="bookBtn">Book</string>
 
     <!--TEXT VIEWS-->
     <string name="usernameTV">Username</string>
@@ -15,6 +16,7 @@
     <string name="homePageTV">Donor App</string>
     <string name="charityRegTV">Charity Registration</string>
     <string name="donorRegTV">Donor Registration</string>
+    <string name="bookingPageTV">Booking Page</string>
 
     <!--HINTS-->
     <string name="firstNameHT">First Name:</string>
@@ -26,6 +28,10 @@
     <string name="emailHT">Email:</string>
     <string name="passwordHT">Password:</string>
     <string name="confirmPasswordHT">Confirm Password:</string>
+    <string name="timeHT">Time</string>
+    <string name="dateHT">Date</string>
+    <string name="longLatHT">Latitude/Longitude</string>
+    <string name="additionalCommentsHT">Additional Comments</string>
 
     <!--HINTS-->
     <string name="usernameHint">username</string>
@@ -51,5 +57,14 @@
     <string name="numImagesString">numImages</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
+
+    <!--FORMATS-->
+    <string name="dateFormat">
+        %1$d
+        %2$s
+        %3$d
+        %4$s
+        %5$d
+    </string>
 
 </resources>

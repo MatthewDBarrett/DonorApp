@@ -9,66 +9,82 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="Booking Page"
-            android:textColor="@color/white"
-            android:textSize="36sp" /> <!--Booking Title-->
+        <include
+            android:id="@id/toolbar"
+            layout="@layout/toolbar"/>
 
-        <EditText
-            android:id="@+id/timeET"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:hint="Time"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:textSize="20sp"
-            tools:ignore="LabelFor"/> <!--Time-->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/dateET"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:hint="Date"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:textSize="20sp"
-            tools:ignore="LabelFor"/> <!--Date-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/locationET"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:hint="Latitude/Longitude"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:textSize="20sp"
-            tools:ignore="LabelFor"/> <!--Location-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/bookingPageTV"
+                    android:textColor="@color/white"
+                    android:textSize="36sp" /> <!--Booking Title-->
 
-        <EditText
-            android:id="@+id/commentsET"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:hint="Comments/Description"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:textSize="20sp"
-            android:maxLength="4"
-            tools:ignore="LabelFor"/> <!--Comments-->
+                <EditText
+                    android:id="@+id/timeET"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/timeHT"
+                    tools:ignore="LabelFor,TextFields" /> <!--Time-->
+
+                <EditText
+                    android:id="@+id/dateET"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/dateHT"
+                    tools:ignore="LabelFor,TextFields" /> <!--date-->
+
+                <EditText
+                    android:id="@+id/locationET"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/longLatHT"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textSize="20sp"
+                    tools:ignore="LabelFor"/> <!--Location-->
+
+                <EditText
+                    android:id="@+id/commentsET"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/additionalCommentsHT"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:textSize="20sp"
+                    android:maxLength="4"
+                    tools:ignore="LabelFor"/> <!--Comments-->
 
 
-        <Button
-            android:id="@+id/bookButtonET"
-            android:layout_width="196dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:background="@color/colorAltAccent"
-            android:text="Book" /> <!--Book Button-->
+                <Button
+                    android:id="@+id/bookButtonET"
+                    android:layout_width="196dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="40dp"
+                    android:background="@color/colorAltAccent"
+                    android:text="@string/bookBtn" /> <!--Book Button-->
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 
