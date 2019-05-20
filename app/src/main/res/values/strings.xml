@@ -32,6 +32,7 @@
     <string name="dateHT">Date</string>
     <string name="longLatHT">Latitude/Longitude</string>
     <string name="additionalCommentsHT">Additional Comments</string>
+    <string name="mapSearchHT">Search Here</string>
 
     <!--HINTS-->
     <string name="usernameHint">username</string>
@@ -66,5 +67,6 @@
         %4$s
         %5$d
     </string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

@@ -43,7 +43,9 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View view) {
                 String user = String.valueOf( username.getText() );
                 String pass = String.valueOf( password.getText() );
+                loginBtn.setEnabled(false);
                 logIn(user, pass);
+                loginBtn.setEnabled(true);
             }
         });
 

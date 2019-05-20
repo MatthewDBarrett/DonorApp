@@ -121,5 +121,13 @@ public class BookingPage extends AppCompatActivity {
             }
         });
 
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
