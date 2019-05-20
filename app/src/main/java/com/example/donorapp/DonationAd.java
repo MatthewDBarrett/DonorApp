@@ -44,7 +44,6 @@ public class DonationAd extends AppCompatActivity {
     LinearLayout photosLL;
     ImageView img;
 
-    ImageButton newDonation;
     ImageButton booking;
     ImageButton home;
 
@@ -63,7 +62,6 @@ public class DonationAd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_ad);
 
-        newDonation = findViewById(R.id.newDonationBtn);
         booking = findViewById(R.id.bookingBtn);
         home = findViewById(R.id.homeBtn);
 
@@ -71,14 +69,6 @@ public class DonationAd extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BookingPage.class);
-                startActivity(intent);
-            }
-        });
-
-        newDonation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DonationAd.class);
                 startActivity(intent);
             }
         });

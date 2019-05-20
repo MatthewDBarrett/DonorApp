@@ -22,7 +22,6 @@ import java.util.Calendar;
 public class BookingPage extends AppCompatActivity {
 
     ImageButton newDonation;
-    ImageButton booking;
     ImageButton home;
 
     Button book;
@@ -40,7 +39,6 @@ public class BookingPage extends AppCompatActivity {
         setContentView(R.layout.activity_booking_page);
 
         newDonation = findViewById(R.id.newDonationBtn);
-        booking = findViewById(R.id.bookingBtn);
         home = findViewById(R.id.homeBtn);
 
         book = findViewById(R.id.bookButtonET);
@@ -48,14 +46,6 @@ public class BookingPage extends AppCompatActivity {
         location = findViewById(R.id.locationET);
         date = findViewById(R.id.dateET);
         time = findViewById(R.id.timeET);
-
-        booking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
-                startActivity(intent);
-            }
-        });
 
         newDonation.setOnClickListener(new View.OnClickListener() {
             @Override

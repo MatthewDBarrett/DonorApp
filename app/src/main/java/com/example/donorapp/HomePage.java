@@ -16,7 +16,6 @@ public class HomePage extends AppCompatActivity {
 
     ImageButton newDonation;
     ImageButton booking;
-    ImageButton home;
     private FragmentManager fragmentManager;
 
 
@@ -27,7 +26,6 @@ public class HomePage extends AppCompatActivity {
 
         newDonation = findViewById(R.id.newDonationBtn);
         booking = findViewById(R.id.bookingBtn);
-        home = findViewById(R.id.homeBtn);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -44,14 +42,6 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DonationAd.class);
-                startActivity(intent);
-            }
-        });
-
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), HomePage.class);
                 startActivity(intent);
             }
         });
