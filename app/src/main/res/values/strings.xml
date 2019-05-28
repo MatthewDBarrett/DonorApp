@@ -9,6 +9,7 @@
     <string name="submitBtn">Submit</string>
     <string name="postBtn">Post</string>
     <string name="bookBtn">Book</string>
+    <string name="quickAccessBtn">Quick Access</string>
 
     <!--TEXT VIEWS-->
     <string name="usernameTV">Username</string>
