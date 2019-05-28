@@ -1,7 +1,14 @@
 package com.example.donorapp;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.Image;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
@@ -19,6 +26,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    EditText mapSearch;
+    ImageButton exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mapSearch = findViewById(R.id.mapSearch);
+        exit = findViewById(R.id.exit);
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -67,6 +87,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Toast.LENGTH_LONG).show();
                 mMap.addMarker(new MarkerOptions().position(latLng).title("Meet up location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                mapSearch.setText(String.valueOf( latLng ));
+
+                SharedPreferences prefs = getApplication().getSharedPreferences(getResources().getString(R.string.locationPrefs), Context.MODE_PRIVATE);
+                prefs.edit().putString(getResources().getString(R.string.latLongPrefs), String.valueOf( latLng ) ).apply();
+
             }
         });
     }

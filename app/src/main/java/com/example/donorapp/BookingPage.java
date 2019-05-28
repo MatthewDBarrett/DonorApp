@@ -47,6 +47,10 @@ public class BookingPage extends AppCompatActivity {
         date = findViewById(R.id.dateET);
         time = findViewById(R.id.timeET);
 
+        SharedPreferences prefs = getApplication().getSharedPreferences(getResources().getString(R.string.locationPrefs), Context.MODE_PRIVATE);
+
+        location.setText( prefs.getString(getResources().getString(R.string.latLongPrefs), ""));
+
         newDonation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
