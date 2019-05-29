@@ -63,7 +63,7 @@ public class HomePage extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), preferencesPage.class);
+                Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
                 startActivity(intent);
             }
         });
@@ -71,7 +71,7 @@ public class HomePage extends AppCompatActivity {
         statistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), statisticsPage.class);
+                Intent intent = new Intent(getApplicationContext(), StatisticsPage.class);
                 startActivity(intent);
             }
         });

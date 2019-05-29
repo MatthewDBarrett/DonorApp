@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".SettingsPage">
+
+    <include
+        android:id="@id/toolbar"
+        layout="@layout/toolbar"/> <!--Toolbar-->
+
+    <TextView
+        android:id="@+id/preferencesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="75dp"
+        android:text="@string/preferencesTitle"
+        android:textSize="36sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/nameLabel"
+            android:text="@string/nameLabel"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:textSize="15sp"/>
+
+
+        <TextView
+            android:id="@+id/nameTV"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="15sp"
+            tools:ignore="LabelFor"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/emailLabel"
+            android:text="@string/emailLabel"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:textSize="15sp"/>
+
+
+        <TextView
+            android:id="@+id/emailTV"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="15sp"
+            tools:ignore="LabelFor"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="176dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorAltAccent"
+        android:text="@string/logoutButton" />
+
+</LinearLayout>
