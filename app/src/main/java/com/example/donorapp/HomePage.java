@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import com.example.donorapp.DonationListing.DonationListFragment;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class HomePage extends AppCompatActivity {
 
@@ -86,7 +88,6 @@ public class HomePage extends AppCompatActivity {
         searchBox = (AutoCompleteTextView)findViewById(R.id.searchBox);
         items = (Spinner)findViewById(R.id.items);
 
-
         //delete these later
         donationExamples.add("iPad");
         donationExamples.add("iPhone 7");
@@ -101,5 +102,13 @@ public class HomePage extends AppCompatActivity {
 
         searchBox.setAdapter(adapter);
         items.setAdapter(adapter1);
+    }
+
+    private void setDonationList(){
+        int numDonations = 0;
+        for(int i = 0; i < numDonations; i++) {
+            String donation = "";
+            donationExamples.add( donation );
+        }
     }
 }
