@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".statisticsPage"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp">
+
+    <TextView
+        android:id="@+id/statsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/statsTitle"
+        android:textSize="36sp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/donationCountLabel"
+                android:text="@string/donationCountLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:textSize="15sp"/>
+
+
+            <EditText
+                android:id="@+id/donationCountET"
+                android:layout_width="150dp"
+                android:inputType="number"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:textSize="15sp"
+                tools:ignore="LabelFor"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/charitiesCountLabel"
+                android:text="@string/charitiesCountLabel"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:importantForAutofill="no"
+                android:textSize="15sp"/>
+
+
+            <EditText
+                android:id="@+id/charitiesCountET"
+                android:inputType="number"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:textSize="15sp"
+                tools:ignore="LabelFor"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="176dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorAltAccent"
+            android:text="@string/backButton" />
+
+    </LinearLayout>
+
+</RelativeLayout>
