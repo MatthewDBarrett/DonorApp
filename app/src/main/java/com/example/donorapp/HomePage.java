@@ -6,17 +6,27 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import com.example.donorapp.DonationListing.DonationListFragment;
+
+import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
 
     ImageButton newDonation;
     ImageButton booking;
     private FragmentManager fragmentManager;
+
+    AutoCompleteTextView searchBox;
+    Spinner items;
+
+    //replace this with actual data
+    ArrayList<String> donationExamples = new ArrayList<>();
 
 
     @Override
@@ -52,5 +62,24 @@ public class HomePage extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, new DonationListFragment());
         transaction.addToBackStack(null);
         transaction.commit();
+
+        searchBox = (AutoCompleteTextView)findViewById(R.id.searchBox);
+        items = (Spinner)findViewById(R.id.items);
+
+
+        //delete these later
+        donationExamples.add("iPad");
+        donationExamples.add("iPhone 7");
+        donationExamples.add("iPhone 8+");
+        donationExamples.add("Samsung Galaxy S8");
+        donationExamples.add("Nintendo Switch");
+        donationExamples.add("Nvidia 1080ti Graphics Card");
+
+        //update donationExamples with actual information
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(HomePage.this, android.R.layout.simple_spinner_dropdown_item, donationExamples );
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(HomePage.this, android.R.layout.simple_spinner_dropdown_item, donationExamples );
+
+        searchBox.setAdapter(adapter);
+        items.setAdapter(adapter1);
     }
 }
