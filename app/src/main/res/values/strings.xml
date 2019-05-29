@@ -11,6 +11,7 @@
     <string name="bookBtn">Book</string>
     <string name="logoutButton">Logout</string>
     <string name="backButton">Back</string>
+    <string name="quickAccessBtn">Quick Access</string>
 
     <!--TEXT VIEWS-->
     <string name="usernameTV">Username</string>
@@ -41,6 +42,7 @@
     <string name="longLatHT">Latitude/Longitude</string>
     <string name="additionalCommentsHT">Additional Comments</string>
     <string name="mapSearchHT">Search Here</string>
+    <string name="searchHT">Search for a donation...</string>
 
     <!--HINTS-->
     <string name="usernameHint">username</string>
@@ -66,6 +68,8 @@
     <string name="numImagesString">numImages</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
+    <string name="locationPrefs">locationPrefs</string>
+    <string name="latLongPrefs">latLongPrefs</string>
 
     <!--FORMATS-->
     <string name="dateFormat">

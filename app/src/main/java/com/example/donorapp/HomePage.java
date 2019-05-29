@@ -15,8 +15,6 @@ import android.widget.Spinner;
 import com.example.donorapp.DonationListing.DonationListFragment;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class HomePage extends AppCompatActivity {
 
@@ -65,16 +63,16 @@ public class HomePage extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), Settings.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), preferencesPage.class);
+                startActivity(intent);
             }
         });
 
         statistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), Settings.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), statisticsPage.class);
+                startActivity(intent);
             }
         });
 

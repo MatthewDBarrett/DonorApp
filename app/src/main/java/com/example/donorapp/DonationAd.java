@@ -88,16 +88,16 @@ public class DonationAd extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), Settings.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), preferencesPage.class);
+                startActivity(intent);
             }
         });
 
         statistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), Settings.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), statisticsPage.class);
+                startActivity(intent);
             }
         });
 
