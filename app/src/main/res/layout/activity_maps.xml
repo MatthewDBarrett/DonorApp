@@ -24,7 +24,9 @@
 
 
             <EditText
+                android:id="@+id/mapSearch"
                 android:hint="@string/mapSearchHT"
+                android:textColor="@color/black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/grey"
@@ -46,5 +48,16 @@
         android:layout_height="match_parent"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+    <ImageButton
+        android:id="@+id/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_remove_circle_red_48dp"
+        android:paddingBottom="20dp"
+        android:paddingEnd="20dp"
+        android:background="@null"/>
 
 </RelativeLayout>

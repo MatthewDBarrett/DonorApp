@@ -9,6 +9,7 @@
     <string name="submitBtn">Submit</string>
     <string name="postBtn">Post</string>
     <string name="bookBtn">Book</string>
+    <string name="quickAccessBtn">Quick Access</string>
 
     <!--TEXT VIEWS-->
     <string name="usernameTV">Username</string>
@@ -68,5 +69,9 @@
         %5$d
     </string>
     <string name="title_activity_maps">Map</string>
+
+    <!--SHARED PREFERENCES-->
+    <string name="locationPrefs">locationPrefs</string>
+    <string name="latLongPrefs">latLongPrefs</string>
 
 </resources>
