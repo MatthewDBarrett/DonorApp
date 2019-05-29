@@ -20,6 +20,8 @@ public class HomePage extends AppCompatActivity {
 
     ImageButton newDonation;
     ImageButton booking;
+    ImageButton settings;
+    ImageButton statistics;
     private FragmentManager fragmentManager;
 
     AutoCompleteTextView searchBox;
@@ -36,6 +38,8 @@ public class HomePage extends AppCompatActivity {
 
         newDonation = findViewById(R.id.newDonationBtn);
         booking = findViewById(R.id.bookingBtn);
+        settings = findViewById(R.id.settingsBtn);
+        statistics = findViewById(R.id.statisticsBtn);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,6 +57,22 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DonationAd.class);
                 startActivity(intent);
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), Settings.class);
+//                startActivity(intent);
+            }
+        });
+
+        statistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), Settings.class);
+//                startActivity(intent);
             }
         });
 

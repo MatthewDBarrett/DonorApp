@@ -46,6 +46,8 @@ public class DonationAd extends AppCompatActivity {
 
     ImageButton booking;
     ImageButton home;
+    ImageButton settings;
+    ImageButton statistics;
 
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
 
@@ -64,6 +66,8 @@ public class DonationAd extends AppCompatActivity {
 
         booking = findViewById(R.id.bookingBtn);
         home = findViewById(R.id.homeBtn);
+        settings = findViewById(R.id.settingsBtn);
+        statistics = findViewById(R.id.statisticsBtn);
 
         booking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +82,22 @@ public class DonationAd extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HomePage.class);
                 startActivity(intent);
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), Settings.class);
+//                startActivity(intent);
+            }
+        });
+
+        statistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), Settings.class);
+//                startActivity(intent);
             }
         });
 

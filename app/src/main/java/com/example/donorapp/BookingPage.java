@@ -23,6 +23,8 @@ public class BookingPage extends AppCompatActivity {
 
     ImageButton newDonation;
     ImageButton home;
+    ImageButton settings;
+    ImageButton statistics;
 
     Button book;
     EditText comments;
@@ -40,6 +42,8 @@ public class BookingPage extends AppCompatActivity {
 
         newDonation = findViewById(R.id.newDonationBtn);
         home = findViewById(R.id.homeBtn);
+        settings = findViewById(R.id.settingsBtn);
+        statistics = findViewById(R.id.statisticsBtn);
 
         book = findViewById(R.id.bookButtonET);
         comments = findViewById(R.id.commentsET);
@@ -64,6 +68,22 @@ public class BookingPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HomePage.class);
                 startActivity(intent);
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), Settings.class);
+//                startActivity(intent);
+            }
+        });
+
+        statistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), Settings.class);
+//                startActivity(intent);
             }
         });
 
