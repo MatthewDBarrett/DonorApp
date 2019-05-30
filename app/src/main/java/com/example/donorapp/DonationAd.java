@@ -66,8 +66,8 @@ public class DonationAd extends AppCompatActivity {
 
         booking = findViewById(R.id.bookingBtn);
         home = findViewById(R.id.homeBtn);
-        settings = findViewById(R.id.settingsBtn);
-        statistics = findViewById(R.id.statisticsBtn);
+        settings = findViewById(R.id.settingsBttn);
+        statistics = findViewById(R.id.statisticsBttn);
 
         booking.setOnClickListener(new View.OnClickListener() {
             @Override
