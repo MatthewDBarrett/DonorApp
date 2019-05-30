@@ -9,6 +9,8 @@
     <string name="submitBtn">Submit</string>
     <string name="postBtn">Post</string>
     <string name="bookBtn">Book</string>
+    <string name="logoutButton">Logout</string>
+    <string name="backButton">Back</string>
     <string name="quickAccessBtn">Quick Access</string>
 
     <!--TEXT VIEWS-->
@@ -18,6 +20,12 @@
     <string name="charityRegTV">Charity Registration</string>
     <string name="donorRegTV">Donor Registration</string>
     <string name="bookingPageTV">Booking Page</string>
+    <string name="nameLabel">Name:</string>
+    <string name="emailLabel">Email Address:</string>
+    <string name="statsTitle">User Statistics</string>
+    <string name="preferencesTitle">User Preferences</string>
+    <string name="donationCountLabel">Number of Donations:</string>
+    <string name="charitiesCountLabel">Number of Charities Donated to:</string>
 
     <!--HINTS-->
     <string name="firstNameHT">First Name:</string>
@@ -34,7 +42,7 @@
     <string name="longLatHT">Latitude/Longitude</string>
     <string name="additionalCommentsHT">Additional Comments</string>
     <string name="mapSearchHT">Search Here</string>
-    <string name="searchHT">Search for a Donation....</string>
+    <string name="searchHT">Search for a donation...</string>
 
     <!--HINTS-->
     <string name="usernameHint">username</string>
@@ -60,6 +68,8 @@
     <string name="numImagesString">numImages</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
+    <string name="locationPrefs">locationPrefs</string>
+    <string name="latLongPrefs">latLongPrefs</string>
 
     <!--FORMATS-->
     <string name="dateFormat">
@@ -70,9 +80,5 @@
         %5$d
     </string>
     <string name="title_activity_maps">Map</string>
-
-    <!--SHARED PREFERENCES-->
-    <string name="locationPrefs">locationPrefs</string>
-    <string name="latLongPrefs">latLongPrefs</string>
 
 </resources>

@@ -74,16 +74,16 @@ public class BookingPage extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), Settings.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
+                startActivity(intent);
             }
         });
 
         statistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), Settings.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), StatisticsPage.class);
+                startActivity(intent);
             }
         });
 
