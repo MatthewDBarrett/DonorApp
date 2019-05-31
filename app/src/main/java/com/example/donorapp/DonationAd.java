@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -35,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class DonationAd extends AppCompatActivity {
 
@@ -50,14 +60,16 @@ public class DonationAd extends AppCompatActivity {
     ImageButton statistics;
 
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
-
     private static int RESULT_LOAD_IMAGE = 1;
-
+    public static final int REQUEST_IMAGE = 100;
     String imageFilePath = "";
 
-    public static final int REQUEST_IMAGE = 100;
-
     ArrayList<Button> buttons = new ArrayList<>();
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference donationDatabase;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +80,15 @@ public class DonationAd extends AppCompatActivity {
         home = findViewById(R.id.homeBtn);
         settings = findViewById(R.id.settingsBtn);
         statistics = findViewById(R.id.statisticsBtn);
+        post = findViewById(R.id.postBtn);
+        title = findViewById(R.id.titleET);
+        description = findViewById(R.id.descriptionET);
+        photosLL = findViewById(R.id.photosLL);
+        img = findViewById(R.id.imageView);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        donationDatabase = firebaseDatabase.getReference("Donations");
+        mAuth = FirebaseAuth.getInstance();
 
         booking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,17 +122,12 @@ public class DonationAd extends AppCompatActivity {
             }
         });
 
-        post = findViewById(R.id.postBtn);
-        title = findViewById(R.id.titleET);
-        description = findViewById(R.id.descriptionET);
-        photosLL = findViewById(R.id.photosLL);
-        img = findViewById(R.id.imageView);
-
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                post.setEnabled(false);
-
+                storeDonation();
+                Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                startActivity(intent);
             }
         });
 
@@ -482,6 +498,20 @@ public class DonationAd extends AppCompatActivity {
         editor.putInt(getResources().getString(R.string.currentDonationString), num).apply();
     }
 
+    private void storeDonation(){
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String userID;
+        if( currentUser != null ) {
+            userID = currentUser.getUid();
 
+            final int min = 0;
+            final int max = 999999;
+            final int random = new Random().nextInt((max - min) + 1) + min;
+            DatabaseReference currentUserRef = donationDatabase.child(String.valueOf( random ));
+            currentUserRef.child("userID").setValue(userID);
+            currentUserRef.child("title").setValue(title.getText().toString().trim());
+            currentUserRef.child("description").setValue(description.getText().toString().trim());
+        }
+    }
 
 }

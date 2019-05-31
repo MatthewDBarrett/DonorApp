@@ -25,9 +25,14 @@
     <string name="lastNameTV">Last Name:</string>
     <string name="emailLabel">Email Address:</string>
     <string name="statsTitle">User Statistics</string>
-    <string name="preferencesTitle">User Preferences</string>
+    <string name="donorSettingsTV">Donor Settings</string>
+    <string name="charitySettingsTV">Charity Settings</string>
     <string name="donationCountLabel">Number of Donations:</string>
     <string name="charitiesCountLabel">Number of Charities Donated to:</string>
+    <string name="orgNameTV">Organisation Name:</string>
+    <string name="streetTV">Street:</string>
+    <string name="suburbTV">Suburb:</string>
+    <string name="postCodeTV">Postcode:</string>
 
     <!--HINTS-->
     <string name="firstNameHT">First Name:</string>
