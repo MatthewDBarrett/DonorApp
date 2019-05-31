@@ -1,8 +1,10 @@
 package com.example.donorapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -105,7 +107,6 @@ public class LoginPage extends AppCompatActivity {
         });
         builder.show();
     }
-
 
     @Override
     public void onStart() {
