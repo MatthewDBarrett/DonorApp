@@ -46,6 +46,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
@@ -527,8 +528,15 @@ public class DonationAd extends AppCompatActivity {
             String filePath = prefs.getString(getResources().getString(R.string.imagePrefsString) + i, null);
             uploadImage( filePath, i + 1 );
         }
-//        Intent intent = new Intent(getApplicationContext(), HomePage.class);
-//        startActivity(intent);
+
+//        if ( numImages > 1 ){
+//            Toast.makeText(DonationAd.this, numImages + " images uploaded", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(DonationAd.this, numImages + " image uploaded", Toast.LENGTH_SHORT).show();
+//        }
+
+        Intent intent = new Intent(getApplicationContext(), HomePage.class);
+        startActivity(intent);
     }
 
     private void uploadImage(String filepath, int number){
@@ -541,7 +549,7 @@ public class DonationAd extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(DonationAd.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(DonationAd.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
