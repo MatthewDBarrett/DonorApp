@@ -514,6 +514,7 @@ public class DonationAd extends AppCompatActivity {
 
             DatabaseReference currentUserRef = donationDatabase.child(String.valueOf( donationNumber ));
             currentUserRef.child("userID").setValue( getCurrentUser() );
+            currentUserRef.child("status").setValue( "available" );
             currentUserRef.child("title").setValue(title.getText().toString().trim());
             currentUserRef.child("description").setValue(description.getText().toString().trim());
 

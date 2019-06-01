@@ -10,13 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.example.donorapp.DonationListing.Donation;
 import com.example.donorapp.DonationListing.DonationListFragment;
 
 import java.util.ArrayList;
 
-public class HomePage extends AppCompatActivity {
+public class HomePage extends AppCompatActivity implements DonationListFragment.OnListFragmentInteractionListener {
 
     ImageButton newDonation;
     ImageButton booking;
@@ -87,6 +89,7 @@ public class HomePage extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
 
+
         searchBox = (AutoCompleteTextView)findViewById(R.id.searchBox);
         items = (Spinner)findViewById(R.id.items);
 
@@ -113,4 +116,20 @@ public class HomePage extends AppCompatActivity {
             donationExamples.add( donation );
         }
     }
+
+    @Override
+    public void onListFragmentInteraction(Donation donation)
+    {
+        Intent intent = new Intent();
+        intent.setClass(this, DonationView.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("donationId", donation.id);
+        bundle.putString("donorId", donation.donorId);
+        bundle.putString("title", donation.title);
+        bundle.putString("description", donation.description);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 }
+
+

@@ -37,7 +37,7 @@ public class MyDonationRecyclerViewAdapter extends RecyclerView.Adapter<MyDonati
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mDonations.get(position);
         holder.mIdView.setText(mDonations.get(position).id);
-        holder.mDonorView.setText(mDonations.get(position).donorId);
+//        holder.mDonorView.setText(mDonations.get(position).donorId);
         holder.mTitleView.setText(mDonations.get(position).title);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +60,7 @@ public class MyDonationRecyclerViewAdapter extends RecyclerView.Adapter<MyDonati
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mIdView;
-        public final TextView mDonorView;
+//        public final TextView mDonorView;
         public final TextView mTitleView;
         public Donation mItem;
 
@@ -68,7 +68,7 @@ public class MyDonationRecyclerViewAdapter extends RecyclerView.Adapter<MyDonati
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.donation_id);
-            mDonorView = (TextView) view.findViewById(R.id.donation_donorId);
+//            mDonorView = (TextView) view.findViewById(R.id.donation_donorId);
             mTitleView = (TextView) view.findViewById(R.id.donation_title);
         }
 

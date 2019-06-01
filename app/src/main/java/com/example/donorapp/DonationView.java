@@ -22,6 +22,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
@@ -85,6 +86,12 @@ public class DonationView extends AppCompatActivity {
     DatabaseReference donationDatabase;
     StorageReference imagesDatabase;
 
+    private String mDonationId;
+    private String mDonorId;
+    private String mTitle;
+    private String mDescription;
+
+
     private FirebaseAuth mAuth;
 
     @Override
@@ -98,13 +105,14 @@ public class DonationView extends AppCompatActivity {
         statistics = findViewById(R.id.statisticsBtn);
         book = findViewById(R.id.bookBtn);
         title = findViewById(R.id.titleET);
+        title.setEnabled(false);
         description = findViewById(R.id.descriptionET);
+        description.setEnabled(false);
         photosLL = findViewById(R.id.photosLL);
         img = findViewById(R.id.imageView);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        donationDatabase = firebaseDatabase.getReference("Donations").child( String.valueOf( getDonationNumber() ) );
-        imagesDatabase = FirebaseStorage.getInstance().getReference().child("donation images").child( String.valueOf( getDonationNumber() ) );
+
         mAuth = FirebaseAuth.getInstance();
 
         clearSharedPrefs();
@@ -149,22 +157,30 @@ public class DonationView extends AppCompatActivity {
             }
         });
 
-        loadData();
+        Bundle bundle = getIntent().getExtras();
+        mDonationId = bundle.getString("donationId");
+        mDonorId = bundle.getString("donorId");
+        mTitle = bundle.getString("title");
+        mDescription = bundle.getString("description");
 
+
+        donationDatabase = firebaseDatabase.getReference("Donations").child( mDonationId );
+        imagesDatabase = FirebaseStorage.getInstance().getReference().child("donation images").child(mDonationId).child("1");
+//        loadData();
+//        String imageDatabase = "gs://ses1a-booking-donor-app.appspot.com/donation images/" + mDonationId + "/1";
+        title.setText(mTitle);
+        description.setText(mDescription);
         try {
             loadImages();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 //        if ( getNumImages() > 0 ) {
 //            newImage(null, false);
 //            setStoredImages();
 //        } else {
 
 //        }
-
-        newImage(null, false);
 
     }
 
@@ -182,23 +198,37 @@ public class DonationView extends AppCompatActivity {
         }
 
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-            if (selectedImage != null) {
-                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                if (cursor != null) {
-                    cursor.moveToFirst();
-
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String picturePath = cursor.getString(columnIndex);
-                    cursor.close();
 
 
-                    img.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-                    newImage(picturePath, false);
+
+
+            imagesDatabase.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+                {
+                    @Override
+                    public void onSuccess(Uri downloadUrl)
+                    {
+
+                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                        if (downloadUrl != null) {
+                            Cursor cursor = getContentResolver().query(downloadUrl, filePathColumn, null, null, null);
+                            if (cursor != null) {
+                                cursor.moveToFirst();
+
+                                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                                String picturePath = cursor.getString(columnIndex);
+                                cursor.close();
+
+
+                                img.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                                newImage(picturePath, false);
+                            }
+                        }
+
+                    }
                 }
-            }
+                );
+
 
         }
 
@@ -258,7 +288,6 @@ public class DonationView extends AppCompatActivity {
         setButtonListener( newBtn );
 
         if ( imageFilePath != null ) {
-
             final Button lastBtn = findViewById(buttons.size() - 1);
 
             Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);
@@ -271,11 +300,12 @@ public class DonationView extends AppCompatActivity {
                     ViewGroup.MarginLayoutParams params2 = (ViewGroup.MarginLayoutParams) lastBtn.getLayoutParams();
                     params2.leftMargin = 20;
                 }
-
-                lastBtn.setBackground( ob );
+                if (lastBtn != null) {
+                    lastBtn.setBackground(ob);
+                    setButtonListener(lastBtn);
+                }
                 img.setImageDrawable( ob );
                 newBtn.setBackground( null );
-                setButtonListener( lastBtn );
             }
 
             if ( !storedImages ) {
@@ -511,13 +541,6 @@ public class DonationView extends AppCompatActivity {
 
     }
 
-    private int getDonationNumber(){
-//        Bundle b = getIntent().getExtras();
-//        if(b != null)
-//            return b.getInt("donationNum");
-//        return -1;
-        return  329704;
-    }
 
     private void storeImages(){
         int numImages = getNumImages();
@@ -542,7 +565,7 @@ public class DonationView extends AppCompatActivity {
         if(filepath != null) {
             Uri uri = Uri.fromFile(new File(filepath));
 
-            StorageReference filePath = imagesDatabase.child( String.valueOf( getDonationNumber() ) ).child( String.valueOf( number ) );
+            StorageReference filePath = imagesDatabase.child( String.valueOf( mDonationId ) ).child( String.valueOf( number ) );
 
             filePath.putFile( uri )
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -577,38 +600,26 @@ public class DonationView extends AppCompatActivity {
         return mimeTypeMap.getExtensionFromMimeType(cr.getType( uri ));
     }
 
-    private void loadData(){
-        DatabaseReference titleDR = donationDatabase.child("title");
-        DatabaseReference descriptionDR = donationDatabase.child("description");
-
-        titleDR.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                title.setText( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-
-        descriptionDR.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                description.setText( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
+//    private void loadData() {
+//        donationDatabase.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                title.setText( dataSnapshot.child("title").getValue().toString() );
+//                description.setText( dataSnapshot.child("description").getValue().toString() );
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//            }
+//        });
+//
+//    }
 
     private void loadImages() throws IOException {
-        StorageReference filePath = imagesDatabase.child("1");
+
         final File localFile = File.createTempFile("images", "jpg");
 
-        filePath.getFile(localFile)
+        imagesDatabase.getFile(localFile)
                 .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {

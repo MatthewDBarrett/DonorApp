@@ -42,8 +42,8 @@ public class BookingPage extends AppCompatActivity {
 
         newDonation = findViewById(R.id.newDonationBtn);
         home = findViewById(R.id.homeBtn);
-        settings = findViewById(R.id.settingsBttn);
-        statistics = findViewById(R.id.statisticsBttn);
+        settings = findViewById(R.id.settingsBtn);
+        statistics = findViewById(R.id.statisticsBtn);
 
         book = findViewById(R.id.bookButtonET);
         comments = findViewById(R.id.commentsET);

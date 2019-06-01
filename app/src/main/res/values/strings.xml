@@ -83,6 +83,7 @@
     <string name="userPasswordPrefs">userPasswordPrefs</string>
     <string name="userFirstNamePrefs">userFirstNamePrefs</string>
     <string name="userLastNamePrefs">userUserLastPrefs</string>
+    <string name="no_data">No data found.</string>
 
     <!--FORMATS-->
     <string name="dateFormat">

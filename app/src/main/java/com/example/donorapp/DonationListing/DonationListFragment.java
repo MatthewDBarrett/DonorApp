@@ -2,6 +2,7 @@ package com.example.donorapp.DonationListing;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -14,8 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.donorapp.DonationAd;
 import com.example.donorapp.LoginPage;
 import com.example.donorapp.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +27,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,16 +42,17 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class DonationListFragment extends Fragment {
+public class DonationListFragment extends Fragment  {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-
+    private MyDonationRecyclerViewAdapter mAdapter;
     private List<Donation> mDonationList = new ArrayList<>();
     private DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+    private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -66,7 +76,6 @@ public class DonationListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mDonationList.clear();
-        loadDonationList();
     }
 
     @Override
@@ -78,13 +87,14 @@ public class DonationListFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyDonationRecyclerViewAdapter(mDonationList, mListener));
+//            if (mColumnCount <= 1) {
+//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//            } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            mAdapter = new MyDonationRecyclerViewAdapter(mDonationList, mListener);
+            recyclerView.setAdapter(mAdapter);
         }
+        loadDonationList();
         return view;
     }
 
@@ -102,7 +112,7 @@ public class DonationListFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot donationSnap : dataSnapshot.getChildren()) {
-                    String donationID = dataSnapshot.getValue(String.class);
+                    String donationID = donationSnap.getKey();
                     loadDonation(donationID);
                 }
             }
@@ -148,20 +158,19 @@ public class DonationListFragment extends Fragment {
     }
 
     private void loadDonation(final String donationID) {
+        Log.d("DonationListing", "Loading donation " + donationID);
         dbRef.child("Donations").child(donationID).addValueEventListener(
             new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String id = snapshot.child("id").getValue().toString();
-                    String donorId = snapshot.child("donorId").getValue().toString();
+                    String id = snapshot.getKey();
+                    String donorId = snapshot.child("userID").getValue().toString();
                     String title = snapshot.child("title").getValue().toString();
                     String description = snapshot.child("description").getValue().toString();
                     String status = snapshot.child("status").getValue().toString();
-                    List<String> imageIds = new ArrayList<>();
-                    for (DataSnapshot imageSnap : snapshot.child("imageIds").getChildren()) {
-                       imageIds.add(imageSnap.getValue().toString());
-                    }
-                    mDonationList.add(new Donation(id, donorId, title, description, status, imageIds));
+                    mDonationList.add(new Donation(id, donorId, title, description, status));
+
+                    mAdapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -170,17 +179,19 @@ public class DonationListFragment extends Fragment {
                 }
             }
         );
+
+
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnListFragmentInteractionListener) {
-//            mListener = (OnListFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnListFragmentInteractionListener");
-//        }
+        if (context instanceof OnListFragmentInteractionListener) {
+            mListener = (OnListFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
+        }
     }
 
     @Override
@@ -202,11 +213,6 @@ public class DonationListFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(Donation item);
-    }
-
-    private void checkAuthorisation()
-    {
-
     }
 
 }

@@ -20,7 +20,7 @@
             android:background="@color/colorAltAccent"/>
 
         <ImageButton
-            android:id="@+id/settingsBttn"
+            android:id="@+id/settingsBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="200dp"
@@ -28,7 +28,7 @@
             android:background="@color/colorAltAccent"/>
 
         <ImageButton
-            android:id="@+id/statisticsBttn"
+            android:id="@+id/statisticsBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
