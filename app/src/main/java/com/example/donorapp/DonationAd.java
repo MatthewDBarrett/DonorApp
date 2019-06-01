@@ -2,6 +2,8 @@ package com.example.donorapp;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -29,6 +32,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +43,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,6 +56,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.UUID;
 
 public class DonationAd extends AppCompatActivity {
 
@@ -68,8 +80,11 @@ public class DonationAd extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference donationDatabase;
+    StorageReference imagesDatabase;
 
     private FirebaseAuth mAuth;
+
+    int donationNumber = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +103,10 @@ public class DonationAd extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         donationDatabase = firebaseDatabase.getReference("Donations");
+        imagesDatabase = FirebaseStorage.getInstance().getReference().child("donation images");
         mAuth = FirebaseAuth.getInstance();
+
+        clearSharedPrefs();
 
         booking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,21 +144,16 @@ public class DonationAd extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 storeDonation();
-                Intent intent = new Intent(getApplicationContext(), HomePage.class);
-                startActivity(intent);
+                post.setEnabled( false );
             }
         });
 
-        setDonationNumber( 1 );
-
-        if ( getDonationNumber() != 0 ) {
-            if ( getNumImages() > 0 ) {
-                newImage(null, false);
-                setStoredImages();
-            } else {
-                newImage(null, false);
-            }
-        }
+//        if ( getNumImages() > 0 ) {
+//            newImage(null, false);
+//            setStoredImages();
+//        } else {
+            newImage(null, false);
+//        }
 
     }
 
@@ -253,7 +266,7 @@ public class DonationAd extends AppCompatActivity {
             }
 
             if ( !storedImages ) {
-                storeImage(imageFilePath, getDonationNumber());
+                storeImage(imageFilePath);
 
             }
 
@@ -393,9 +406,9 @@ public class DonationAd extends AppCompatActivity {
         startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
 
-    private void storeImage( String filePath, int donationNo ){
+    private void storeImage( String filePath){
         SharedPreferences prefs;
-        prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString) + donationNo, Context.MODE_PRIVATE);
+        prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
         int index = getNumImages();
@@ -405,23 +418,23 @@ public class DonationAd extends AppCompatActivity {
         incrementNumImages();
     }
 
-    private void setStoredImages() {
-        int numImages = getNumImages();
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString) + getDonationNumber(), Context.MODE_PRIVATE);
-
-        for (int i = 0; i < numImages; i++) {
-            String filePath = prefs.getString(getResources().getString(R.string.imagePrefsString) + i, null);
-            newImage(filePath, true);
-        }
-    }
+//    private void setStoredImages() {
+//        int numImages = getNumImages();
+//        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString), Context.MODE_PRIVATE);
+//
+//        for (int i = 0; i < numImages; i++) {
+//            String filePath = prefs.getString(getResources().getString(R.string.imagePrefsString) + i, null);
+//            newImage(filePath, true);
+//        }
+//    }
 
     private int getNumImages(){
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString) + getDonationNumber(), Context.MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString), Context.MODE_PRIVATE);
         return prefs.getInt(getResources().getString(R.string.numImagesString), 0);
     }
 
     private void incrementNumImages() {
-        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString) + getDonationNumber(), Context.MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString), Context.MODE_PRIVATE);
 
         int numJobs = prefs.getInt(getResources().getString(R.string.numImagesString), 0);
 
@@ -472,7 +485,7 @@ public class DonationAd extends AppCompatActivity {
                 }
 
                 if (index != (buttons.size() - 1)) {
-                    SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString) + getDonationNumber(), Context.MODE_PRIVATE);
+                    SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString), Context.MODE_PRIVATE);
                     img.setImageURI(Uri.parse(prefs.getString(getResources().getString(R.string.imagePrefsString) + index, null)));
                 } else {
 
@@ -486,32 +499,81 @@ public class DonationAd extends AppCompatActivity {
     }
 
     private int getDonationNumber(){
-        SharedPreferences prefs;
-        prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString), Context.MODE_PRIVATE);
-        return prefs.getInt(getResources().getString(R.string.currentDonationString), 0);
-    }
-
-    private void setDonationNumber(int num){
-        SharedPreferences prefs;
-        prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt(getResources().getString(R.string.currentDonationString), num).apply();
+//        SharedPreferences prefs;
+//        prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString), Context.MODE_PRIVATE);
+//        return prefs.getInt(getResources().getString(R.string.currentDonationString), 0);
+        return donationNumber;
     }
 
     private void storeDonation(){
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        String userID;
-        if( currentUser != null ) {
-            userID = currentUser.getUid();
+        if( getCurrentUser() != null ) {
+            if(donationNumber == -1)
+                generateDonationNum();
 
-            final int min = 0;
-            final int max = 999999;
-            final int random = new Random().nextInt((max - min) + 1) + min;
-            DatabaseReference currentUserRef = donationDatabase.child(String.valueOf( random ));
-            currentUserRef.child("userID").setValue(userID);
+            DatabaseReference currentUserRef = donationDatabase.child(String.valueOf( donationNumber ));
+            currentUserRef.child("userID").setValue( getCurrentUser() );
             currentUserRef.child("title").setValue(title.getText().toString().trim());
             currentUserRef.child("description").setValue(description.getText().toString().trim());
+
+            storeImages();
         }
+    }
+
+    private void storeImages(){
+        int numImages = getNumImages();
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString), Context.MODE_PRIVATE);
+
+        for (int i = 0; i < numImages; i++) {
+            String filePath = prefs.getString(getResources().getString(R.string.imagePrefsString) + i, null);
+            uploadImage( filePath, i + 1 );
+        }
+//        Intent intent = new Intent(getApplicationContext(), HomePage.class);
+//        startActivity(intent);
+    }
+
+    private void uploadImage(String filepath, int number){
+        if(filepath != null) {
+            Uri uri = Uri.fromFile(new File(filepath));
+
+            StorageReference filePath = imagesDatabase.child( String.valueOf( getDonationNumber() ) ).child( String.valueOf( number ) );
+
+            filePath.putFile( uri )
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(DonationAd.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            String message = exception.toString();
+                            Toast.makeText(DonationAd.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+        }
+    }
+
+    private void generateDonationNum(){
+        final int min = 111111;
+        final int max = 999999;
+        donationNumber = new Random().nextInt((max - min) + 1) + min;
+    }
+
+    private String getCurrentUser(){
+        return mAuth.getUid();
+    }
+
+    private void clearSharedPrefs(){
+        SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString), Context.MODE_PRIVATE);
+        prefs.edit().clear().apply();
+    }
+
+    private String getExtension(Uri uri){
+        ContentResolver cr = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(cr.getType( uri ));
     }
 
 }
