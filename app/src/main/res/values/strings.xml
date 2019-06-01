@@ -12,6 +12,7 @@
     <string name="logoutButton">Logout</string>
     <string name="backButton">Back</string>
     <string name="quickAccessBtn">Quick Access</string>
+    <string name="makeBookingBtn">Make Booking</string>
 
     <!--TEXT VIEWS-->
     <string name="usernameTV">Username</string>

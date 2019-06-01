@@ -71,8 +71,12 @@ public class HomePage extends AppCompatActivity {
         statistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), StatisticsPage.class);
+                Intent intent = new Intent(getApplicationContext(), DonationView.class);
+                Bundle b = new Bundle();
+                b.putInt("donationNum", 329704);
+                intent.putExtras(b);
                 startActivity(intent);
+                finish();
             }
         });
 
