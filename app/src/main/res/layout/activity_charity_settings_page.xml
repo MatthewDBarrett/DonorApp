@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".SettingsPage">
+    tools:context=".CharitySettingsPage">
 
     <include
         android:id="@id/toolbar"
@@ -17,8 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="75dp"
-        android:text="@string/donorSettingsTV"
-        android:textSize="36sp" />
+        android:text="@string/charitySettingsTV"
+        android:textSize="36sp" /> <!--Title-->
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/firstNameTV"
+            android:text="@string/orgNameTV"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
@@ -35,42 +35,19 @@
 
 
         <TextView
-            android:id="@+id/firstNameTV"
+            android:id="@+id/organisationTV"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:textSize="15sp"
             tools:ignore="LabelFor"/>
 
-    </LinearLayout> <!--First Name-->
+    </LinearLayout> <!--Organisation Name-->
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:text="@string/lastNameTV"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:importantForAutofill="no"
-            android:textSize="15sp"/>
-
-
-        <TextView
-            android:id="@+id/lastNameTV"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="15sp"
-            tools:ignore="LabelFor"/>
-
-    </LinearLayout> <!--Last Name-->
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
@@ -90,16 +67,87 @@
             android:textSize="15sp"
             tools:ignore="LabelFor"/>
 
-    </LinearLayout>
+    </LinearLayout> <!--Email Address-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="@string/streetTV"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:textSize="15sp"/>
+
+
+        <TextView
+            android:id="@+id/streetTV"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="15sp"
+            tools:ignore="LabelFor"/>
+
+    </LinearLayout> <!--Street-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="@string/suburbTV"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:textSize="15sp"/>
+
+
+        <TextView
+            android:id="@+id/suburbTV"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="15sp"
+            tools:ignore="LabelFor"/>
+
+    </LinearLayout> <!--Suburb-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="@string/postCodeTV"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:textSize="15sp"/>
+
+
+        <TextView
+            android:id="@+id/postCodeTV"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="15sp"
+            tools:ignore="LabelFor"/>
+
+    </LinearLayout> <!--Postcode-->
 
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="176dp"
         android:layout_height="44dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
         android:background="@color/colorAltAccent"
-        android:text="@string/logoutButton" />
+        android:text="@string/logoutButton" /> <!--Logout Button-->
 
 </LinearLayout>

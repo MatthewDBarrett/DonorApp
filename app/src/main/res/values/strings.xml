@@ -21,11 +21,18 @@
     <string name="donorRegTV">Donor Registration</string>
     <string name="bookingPageTV">Booking Page</string>
     <string name="nameLabel">Name:</string>
+    <string name="firstNameTV">First Name:</string>
+    <string name="lastNameTV">Last Name:</string>
     <string name="emailLabel">Email Address:</string>
     <string name="statsTitle">User Statistics</string>
-    <string name="preferencesTitle">User Preferences</string>
+    <string name="donorSettingsTV">Donor Settings</string>
+    <string name="charitySettingsTV">Charity Settings</string>
     <string name="donationCountLabel">Number of Donations:</string>
     <string name="charitiesCountLabel">Number of Charities Donated to:</string>
+    <string name="orgNameTV">Organisation Name:</string>
+    <string name="streetTV">Street:</string>
+    <string name="suburbTV">Suburb:</string>
+    <string name="postCodeTV">Postcode:</string>
 
     <!--HINTS-->
     <string name="firstNameHT">First Name:</string>
@@ -70,6 +77,11 @@
     <string name="description">Description</string>
     <string name="locationPrefs">locationPrefs</string>
     <string name="latLongPrefs">latLongPrefs</string>
+    <string name="userPrefs">userPrefs</string>
+    <string name="userEmailPrefs">userEmailPrefs</string>
+    <string name="userPasswordPrefs">userPasswordPrefs</string>
+    <string name="userFirstNamePrefs">userFirstNamePrefs</string>
+    <string name="userLastNamePrefs">userUserLastPrefs</string>
 
     <!--FORMATS-->
     <string name="dateFormat">
