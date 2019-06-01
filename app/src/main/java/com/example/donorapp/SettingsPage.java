@@ -121,8 +121,6 @@ public class SettingsPage extends AppCompatActivity {
     }
 
     private void setUserFields(){
-        SharedPreferences prefs = getApplication().getSharedPreferences(getResources().getString(R.string.userPrefs), Context.MODE_PRIVATE);
-
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if( currentUser != null ) {
             String userID = currentUser.getUid();
