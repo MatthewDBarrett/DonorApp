@@ -520,6 +520,7 @@ public class DonationAd extends AppCompatActivity {
             currentUserRef.child("status").setValue( "available" );
             currentUserRef.child("title").setValue(title.getText().toString().trim());
             currentUserRef.child("description").setValue(description.getText().toString().trim());
+            currentUserRef.child("numImages").setValue( getNumImages() );
 
             storeImages();
         }
