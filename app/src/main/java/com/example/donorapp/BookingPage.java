@@ -206,41 +206,41 @@ public class BookingPage extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if( currentUser != null ) {
             userId = currentUser.getUid();
-            try {
-                userDatabase.child(userId).child("firstName").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        firstName += Objects.requireNonNull(dataSnapshot.getValue()).toString();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
-                ;
-                userDatabase.child(userId).child("lastName").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        lastName = Objects.requireNonNull(dataSnapshot.getValue()).toString();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
-                name = firstName + " " + lastName;
-            } catch (NullPointerException npe) {
-                userDatabase.child(userId).child("orgName").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        name = Objects.requireNonNull(dataSnapshot.getValue()).toString();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
-            }
+//            try {
+//                userDatabase.child(userId).child("firstName").addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        firstName += Objects.requireNonNull(dataSnapshot.getValue()).toString();
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//                    }
+//                });
+//                ;
+//                userDatabase.child(userId).child("lastName").addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        lastName = Objects.requireNonNull(dataSnapshot.getValue()).toString();
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//                    }
+//                });
+//                name = firstName + " " + lastName;
+//            } catch (NullPointerException npe) {
+//                userDatabase.child(userId).child("orgName").addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        name = Objects.requireNonNull(dataSnapshot.getValue()).toString();
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//                    }
+//                });
+//            }
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginPage.class);
             startActivity(intent);
@@ -252,7 +252,7 @@ public class BookingPage extends AppCompatActivity {
 
                 DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference().child("Notifications").child(mDonorId);
                 databaseRef.child("title").setValue(mDonationTitle);
-                databaseRef.child("fromName").setValue(name);
+//                databaseRef.child("fromName").setValue(name);
                 databaseRef.child("fromId").setValue(userId);
                 Toast.makeText(BookingPage.this, "A message has been sent to user " + mDonorId + " about " + mDonationTitle, Toast.LENGTH_LONG).show();
                 finish();
