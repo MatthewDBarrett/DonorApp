@@ -116,48 +116,70 @@ public class CharitySettingsPage extends AppCompatActivity {
     }
 
     private void setUserFields(){
-        SharedPreferences prefs = getApplication().getSharedPreferences(getResources().getString(R.string.userPrefs), Context.MODE_PRIVATE);
-
         FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if( currentUser != null ) {
-//            String userID = currentUser.getUid();
-//            DatabaseReference first = userDatabase.child(userID).child( "firstName" );
-//            DatabaseReference last = userDatabase.child(userID).child( "lastName" );
-//            DatabaseReference emailAddress = userDatabase.child(userID).child( "email" );
-//
-//            first.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    firstName.setText( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//                }
-//            });
-//
-//            last.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    lastName.setText( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//                }
-//            });
-//
-//            emailAddress.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    email.setText( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//                }
-//            });
-//        }
+        if( currentUser != null ) {
+            String userID = currentUser.getUid();
+            DatabaseReference name = userDatabase.child(userID).child( "orgName" );
+            DatabaseReference emailAddress = userDatabase.child(userID).child( "email" );
+            DatabaseReference charityStreet = userDatabase.child(userID).child( "street" );
+            DatabaseReference charitySuburb = userDatabase.child(userID).child( "suburb" );
+            DatabaseReference charityPostCode = userDatabase.child(userID).child( "postcode" );
+
+            name.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    orgName.setText( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+
+            emailAddress.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    email.setText( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+
+            charityStreet.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    street.setText( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+
+            charitySuburb.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    suburb.setText( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+
+            charityPostCode.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    postCode.setText( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+        }
 
     }
 
