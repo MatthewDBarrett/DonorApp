@@ -95,8 +95,13 @@ public class BookingPage extends AppCompatActivity {
         newDonation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DonationAd.class);
-                startActivity(intent);
+                if( userType ){
+                    Intent intent = new Intent(getApplicationContext(), DonationAd.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), DonationRequest.class);
+                    startActivity(intent);
+                }
             }
         });
 

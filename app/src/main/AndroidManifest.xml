@@ -66,6 +66,7 @@
         <activity android:name=".CharityRegistrationPage" />
         <activity android:name=".SettingsPage" />
         <activity android:name=".CharitySettingsPage" />
+        <activity android:name=".DonationRequest" />
     </application>
 
 </manifest>

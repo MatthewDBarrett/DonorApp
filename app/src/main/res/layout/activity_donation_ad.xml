@@ -26,7 +26,7 @@
 
                 <EditText
                     android:id="@+id/titleET"
-                    android:layout_width="250dp"
+                    android:layout_width="315dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/title"
                     android:importantForAutofill="no"
@@ -37,11 +37,14 @@
 
                 <EditText
                     android:id="@+id/descriptionET"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="315dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/box"
+                    android:gravity="start"
+                    android:padding="5dp"
                     android:hint="@string/description"
                     android:importantForAutofill="no"
-                    android:inputType="textShortMessage"
+                    android:inputType="text"
                     android:textSize="20sp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
