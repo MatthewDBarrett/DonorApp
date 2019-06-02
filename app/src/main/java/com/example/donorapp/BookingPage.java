@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -54,10 +55,13 @@ public class BookingPage extends AppCompatActivity {
     String userId;
     private FirebaseAuth mAuth;
     DatabaseReference userDatabase;
+    DatabaseReference otherUserDatabase;
 
-    Boolean userType;
+    Boolean userType = true;
 
     int startMinute, startHour, endMinute, endHour;
+
+    String userName;
 
 
     @Override
@@ -85,6 +89,7 @@ public class BookingPage extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         userDatabase = FirebaseDatabase.getInstance().getReference("Users");
+        otherUserDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
         getUserType();
 
@@ -201,7 +206,7 @@ public class BookingPage extends AppCompatActivity {
         });
 
 
-//        DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if( currentUser != null ) {
@@ -272,8 +277,32 @@ public class BookingPage extends AppCompatActivity {
                     String type = Objects.requireNonNull(dataSnapshot.getValue()).toString();
                     if( type.equals( "donor" ) ) {
                         setUserType(true);
+                        DatabaseReference first = otherUserDatabase.child( mDonorId ).child( "orgName" );
+                        first.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                setUserName( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
                     } else {
                         setUserType(false);
+                        DatabaseReference first = otherUserDatabase.child( mDonorId ).child( "firstName" );
+                        Log.d("userTest", mDonorId);
+                        first.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                setUserName( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
+                                Log.d("userTest", Objects.requireNonNull(dataSnapshot.getValue()).toString());
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
                     }
                 }
 
@@ -287,5 +316,11 @@ public class BookingPage extends AppCompatActivity {
     private void setUserType(Boolean donor){
         userType = donor;
     }
+
+    private void setUserName(String usersName){
+        userName = usersName;
+    }
+
+
 
 }
