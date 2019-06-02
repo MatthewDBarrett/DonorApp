@@ -44,7 +44,7 @@
                     android:padding="5dp"
                     android:hint="@string/description"
                     android:importantForAutofill="no"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     android:textSize="20sp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
