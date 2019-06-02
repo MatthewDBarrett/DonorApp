@@ -149,10 +149,18 @@ public class DonationListFragment extends Fragment  {
 
     private void loadDonation(final DataSnapshot snapshot) {
         String id = snapshot.getKey();
-        String donorId = snapshot.child("userID").getValue().toString();
-        String title = snapshot.child("title").getValue().toString();
-        String description = snapshot.child("description").getValue().toString();
-        String status = snapshot.child("status").getValue().toString();
+        String donorId = "";
+        if( snapshot.child("userID").getValue() != null )
+            donorId = snapshot.child("userID").getValue().toString();
+        String title = "";
+        if( snapshot.child("title").getValue() != null )
+            title = snapshot.child("title").getValue().toString();
+        String description = "";
+        if( snapshot.child("description").getValue() != null )
+            description = snapshot.child("description").getValue().toString();
+        String status = "";
+        if( snapshot.child("status").getValue() != null )
+            status = snapshot.child("status").getValue().toString();
         mDonationList.add(new Donation(id, donorId, title, description, status));
 
         mAdapter.notifyDataSetChanged();
