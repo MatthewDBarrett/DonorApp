@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -31,6 +32,7 @@ public class BookingPage extends AppCompatActivity {
     EditText location;
     EditText date;
     EditText time;
+    TextView bookingTitle;
 
     int startMinute, startHour, endMinute, endHour;
 
@@ -38,7 +40,13 @@ public class BookingPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_booking_page);
+
+        Bundle bundle = getIntent().getExtras();
+        String title = bundle.getString("title");
+        bookingTitle = findViewById(R.id.booking_title);
+        bookingTitle.setText(String.format(((String)bookingTitle.getText()), title));
 
         newDonation = findViewById(R.id.newDonationBtn);
         home = findViewById(R.id.homeBtn);

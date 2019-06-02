@@ -149,20 +149,23 @@ public class DonationView extends AppCompatActivity {
             }
         });
 
-        book.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
-                startActivity(intent);
-            }
-        });
 
-        Bundle bundle = getIntent().getExtras();
+        final Bundle bundle = getIntent().getExtras();
         mDonationId = bundle.getString("donationId");
         mDonorId = bundle.getString("donorId");
         mTitle = bundle.getString("title");
         mDescription = bundle.getString("description");
 
+
+
+        book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
         donationDatabase = firebaseDatabase.getReference("Donations").child( mDonationId );
         imagesDatabase = FirebaseStorage.getInstance().getReference().child("donation images").child(mDonationId).child("1");
