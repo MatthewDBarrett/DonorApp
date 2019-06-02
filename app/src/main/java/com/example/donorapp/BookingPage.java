@@ -52,6 +52,11 @@ public class BookingPage extends AppCompatActivity {
     String lastName;
     String name;
 
+    private FirebaseAuth mAuth;
+    DatabaseReference userDatabase;
+
+    Boolean userType;
+
     int startMinute, startHour, endMinute, endHour;
 
 
@@ -78,6 +83,11 @@ public class BookingPage extends AppCompatActivity {
         date = findViewById(R.id.dateET);
         time = findViewById(R.id.timeET);
 
+        mAuth = FirebaseAuth.getInstance();
+        userDatabase = FirebaseDatabase.getInstance().getReference("Users");
+
+        getUserType();
+
         SharedPreferences prefs = getApplication().getSharedPreferences(getResources().getString(R.string.locationPrefs), Context.MODE_PRIVATE);
 
         location.setText( prefs.getString(getResources().getString(R.string.latLongPrefs), ""));
@@ -101,8 +111,13 @@ public class BookingPage extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
-                startActivity(intent);
+                if( userType ){
+                    Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), CharitySettingsPage.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -237,6 +252,34 @@ public class BookingPage extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void getUserType(){
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if( currentUser != null ) {
+            String userID = currentUser.getUid();
+            DatabaseReference userType = userDatabase.child(userID).child( "userType" );
+
+            userType.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String type = Objects.requireNonNull(dataSnapshot.getValue()).toString();
+                    if( type.equals( "donor" ) ) {
+                        setUserType(true);
+                    } else {
+                        setUserType(false);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+        }
+    }
+
+    private void setUserType(Boolean donor){
+        userType = donor;
     }
 
 }

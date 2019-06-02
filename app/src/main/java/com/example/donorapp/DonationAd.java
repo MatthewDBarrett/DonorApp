@@ -56,6 +56,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
@@ -87,6 +88,10 @@ public class DonationAd extends AppCompatActivity {
 
     int donationNumber = -1;
 
+    DatabaseReference userDatabase;
+
+    Boolean userType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +112,9 @@ public class DonationAd extends AppCompatActivity {
         donationDatabase = firebaseDatabase.getReference("Donations");
         imagesDatabase = FirebaseStorage.getInstance().getReference().child("donation images");
         mAuth = FirebaseAuth.getInstance();
+        userDatabase = FirebaseDatabase.getInstance().getReference("Users");
+
+        getUserType();
 
         clearSharedPrefs();
 
@@ -129,8 +137,13 @@ public class DonationAd extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
-                startActivity(intent);
+                if( userType ){
+                    Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), CharitySettingsPage.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -584,6 +597,34 @@ public class DonationAd extends AppCompatActivity {
         ContentResolver cr = getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(cr.getType( uri ));
+    }
+
+    private void getUserType(){
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if( currentUser != null ) {
+            String userID = currentUser.getUid();
+            DatabaseReference userType = userDatabase.child(userID).child( "userType" );
+
+            userType.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String type = Objects.requireNonNull(dataSnapshot.getValue()).toString();
+                    if( type.equals( "donor" ) ) {
+                        setUserType(true);
+                    } else {
+                        setUserType(false);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+        }
+    }
+
+    private void setUserType(Boolean donor){
+        userType = donor;
     }
 
 }

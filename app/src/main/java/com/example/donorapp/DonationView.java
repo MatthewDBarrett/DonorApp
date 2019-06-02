@@ -94,6 +94,10 @@ public class DonationView extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    DatabaseReference userDatabase;
+
+    Boolean userType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +118,9 @@ public class DonationView extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         mAuth = FirebaseAuth.getInstance();
+        userDatabase = FirebaseDatabase.getInstance().getReference("Users");
+
+        getUserType();
 
         clearSharedPrefs();
 
@@ -136,8 +143,13 @@ public class DonationView extends AppCompatActivity {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
-                startActivity(intent);
+                if( userType ){
+                    Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), CharitySettingsPage.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -634,6 +646,34 @@ public class DonationView extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void getUserType(){
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if( currentUser != null ) {
+            String userID = currentUser.getUid();
+            DatabaseReference userType = userDatabase.child(userID).child( "userType" );
+
+            userType.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String type = Objects.requireNonNull(dataSnapshot.getValue()).toString();
+                    if( type.equals( "donor" ) ) {
+                        setUserType(true);
+                    } else {
+                        setUserType(false);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+        }
+    }
+
+    private void setUserType(Boolean donor){
+        userType = donor;
     }
 }
 

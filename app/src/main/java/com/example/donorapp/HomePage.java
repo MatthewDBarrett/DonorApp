@@ -1,5 +1,6 @@
 package com.example.donorapp;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
@@ -15,8 +16,16 @@ import android.widget.Spinner;
 
 import com.example.donorapp.DonationListing.Donation;
 import com.example.donorapp.DonationListing.DonationListFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class HomePage extends AppCompatActivity implements DonationListFragment.OnListFragmentInteractionListener {
 
@@ -32,6 +41,10 @@ public class HomePage extends AppCompatActivity implements DonationListFragment.
     //replace this with actual data
     ArrayList<String> donationExamples = new ArrayList<>();
 
+    private FirebaseAuth mAuth;
+    DatabaseReference userDatabase;
+
+    Boolean userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +58,11 @@ public class HomePage extends AppCompatActivity implements DonationListFragment.
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
+        userDatabase = FirebaseDatabase.getInstance().getReference("Users");
+
+        getUserType();
 
         booking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,20 +83,21 @@ public class HomePage extends AppCompatActivity implements DonationListFragment.
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
-                startActivity(intent);
+                if( userType ){
+                    Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), CharitySettingsPage.class);
+                    startActivity(intent);
+                }
             }
         });
 
         statistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DonationView.class);
-                Bundle b = new Bundle();
-                b.putInt("donationNum", 329704);
-                intent.putExtras(b);
+                Intent intent = new Intent(getApplicationContext(), StatisticsPage.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -129,6 +148,34 @@ public class HomePage extends AppCompatActivity implements DonationListFragment.
         bundle.putString("description", donation.description);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    private void getUserType(){
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if( currentUser != null ) {
+            String userID = currentUser.getUid();
+            DatabaseReference userType = userDatabase.child(userID).child( "userType" );
+
+            userType.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String type = Objects.requireNonNull(dataSnapshot.getValue()).toString();
+                    if( type.equals( "donor" ) ) {
+                        setUserType(true);
+                    } else {
+                        setUserType(false);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+        }
+    }
+
+    private void setUserType(Boolean donor){
+        userType = donor;
     }
 }
 
