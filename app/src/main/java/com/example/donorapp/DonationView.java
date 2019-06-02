@@ -70,7 +70,6 @@ public class DonationView extends AppCompatActivity {
     LinearLayout photosLL;
     ImageView img;
 
-    ImageButton booking;
     ImageButton home;
     ImageButton settings;
     ImageButton statistics;
@@ -103,7 +102,6 @@ public class DonationView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_view);
 
-        booking = findViewById(R.id.bookingBtn);
         home = findViewById(R.id.homeBtn);
         settings = findViewById(R.id.settingsBtn);
         statistics = findViewById(R.id.statisticsBtn);
@@ -123,14 +121,6 @@ public class DonationView extends AppCompatActivity {
         getUserType();
 
         clearSharedPrefs();
-
-        booking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
-                startActivity(intent);
-            }
-        });
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override

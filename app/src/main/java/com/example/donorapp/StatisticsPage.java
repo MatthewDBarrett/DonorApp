@@ -33,7 +33,6 @@ public class StatisticsPage extends AppCompatActivity {
     EditText charitiesCountET;
 
     ImageButton newDonation;
-    ImageButton booking;
     ImageButton settings;
     ImageButton home;
 
@@ -57,7 +56,6 @@ public class StatisticsPage extends AppCompatActivity {
         charitiesCountET = findViewById(R.id.charitiesCountET);
 
         newDonation = findViewById(R.id.newDonationBtn);
-        booking = findViewById(R.id.bookingBtn);
         home = findViewById(R.id.homeBtn);
         settings = findViewById(R.id.settingsBtn);
 
@@ -65,14 +63,6 @@ public class StatisticsPage extends AppCompatActivity {
         userDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
         getUserType();
-
-        booking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
-                startActivity(intent);
-            }
-        });
 
         newDonation.setOnClickListener(new View.OnClickListener() {
             @Override

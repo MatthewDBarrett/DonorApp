@@ -35,7 +35,6 @@ public class SettingsPage extends AppCompatActivity {
     TextView email;
 
     ImageButton newDonation;
-    ImageButton booking;
     ImageButton home;
     ImageButton statistics;
 
@@ -53,19 +52,10 @@ public class SettingsPage extends AppCompatActivity {
         email = findViewById(R.id.emailTV);
 
         newDonation = findViewById(R.id.newDonationBtn);
-        booking = findViewById(R.id.bookingBtn);
         home = findViewById(R.id.homeBtn);
         statistics = findViewById(R.id.statisticsBtn);
 
         setUserFields();
-
-        booking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
-                startActivity(intent);
-            }
-        });
 
         newDonation.setOnClickListener(new View.OnClickListener() {
             @Override

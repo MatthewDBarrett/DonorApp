@@ -30,7 +30,6 @@ import java.util.Objects;
 public class HomePage extends AppCompatActivity implements DonationListFragment.OnListFragmentInteractionListener {
 
     ImageButton newDonation;
-    ImageButton booking;
     ImageButton settings;
     ImageButton statistics;
     private FragmentManager fragmentManager;
@@ -52,7 +51,6 @@ public class HomePage extends AppCompatActivity implements DonationListFragment.
         setContentView(R.layout.activity_home_page);
 
         newDonation = findViewById(R.id.newDonationBtn);
-        booking = findViewById(R.id.bookingBtn);
         settings = findViewById(R.id.settingsBtn);
         statistics = findViewById(R.id.statisticsBtn);
 
@@ -63,14 +61,6 @@ public class HomePage extends AppCompatActivity implements DonationListFragment.
         userDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
         getUserType();
-
-        booking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
-                startActivity(intent);
-            }
-        });
 
         newDonation.setOnClickListener(new View.OnClickListener() {
             @Override

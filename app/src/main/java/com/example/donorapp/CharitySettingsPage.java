@@ -37,7 +37,6 @@ public class CharitySettingsPage extends AppCompatActivity {
     TextView postCode;
 
     ImageButton newDonation;
-    ImageButton booking;
     ImageButton home;
     ImageButton statistics;
 
@@ -58,19 +57,10 @@ public class CharitySettingsPage extends AppCompatActivity {
         postCode = findViewById(R.id.postCodeTV);
 
         newDonation = findViewById(R.id.newDonationBtn);
-        booking = findViewById(R.id.bookingBtn);
         home = findViewById(R.id.homeBtn);
         statistics = findViewById(R.id.statisticsBtn);
 
         setUserFields();
-
-        booking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
-                startActivity(intent);
-            }
-        });
 
         newDonation.setOnClickListener(new View.OnClickListener() {
             @Override

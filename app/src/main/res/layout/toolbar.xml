@@ -23,7 +23,7 @@
             android:id="@+id/settingsBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="200dp"
+            android:layout_marginEnd="20dp"
             android:src="@drawable/ic_settings_white_24dp"
             android:background="@color/colorAltAccent"/>
 
@@ -31,17 +31,10 @@
             android:id="@+id/statisticsBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="250dp"
             android:src="@drawable/ic_chart_white_24dp"
             android:background="@color/colorAltAccent"/>
 
-        <ImageButton
-            android:id="@+id/bookingBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_bookmark_border_white_24dp"
-            android:background="@color/colorAltAccent"/>
 
         <ImageButton
             android:id="@+id/newDonationBtn"
