@@ -53,7 +53,7 @@ public class RequestView extends AppCompatActivity {
         statistics = findViewById(R.id.statisticsBtn);
         book = findViewById(R.id.bookBtn);
         title = findViewById(R.id.titleTV);
-        description = findViewById(R.id.descriptionTV);
+        description = findViewById(R.id.descriptionET);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
 

@@ -103,7 +103,13 @@ public class HomePage extends AppCompatActivity implements DonationListFragment.
     public void onListFragmentInteraction(Donation donation)
     {
         Intent intent = new Intent();
-        intent.setClass(this, DonationView.class);
+        if (userType) {
+            intent.setClass(this, RequestView.class);
+        } else {
+            intent.setClass(this, DonationView.class);
+        }
+
+
         Bundle bundle = new Bundle();
         bundle.putString("donationId", donation.id);
         bundle.putString("donorId", donation.donorId);

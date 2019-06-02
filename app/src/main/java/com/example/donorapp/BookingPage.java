@@ -201,7 +201,7 @@ public class BookingPage extends AppCompatActivity {
         });
 
 
-        DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+//        DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if( currentUser != null ) {

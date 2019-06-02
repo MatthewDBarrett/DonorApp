@@ -148,14 +148,19 @@ public class DonationListFragment extends Fragment  {
     }
 
     private void loadDonation(final DataSnapshot snapshot) {
-        String id = snapshot.getKey();
-        String donorId = snapshot.child("userID").getValue().toString();
-        String title = snapshot.child("title").getValue().toString();
-        String description = snapshot.child("description").getValue().toString();
-        String status = snapshot.child("status").getValue().toString();
-        mDonationList.add(new Donation(id, donorId, title, description, status));
+        try {
+            String id = snapshot.getKey();
+            String donorId = snapshot.child("userID").getValue().toString();
+            String title = snapshot.child("title").getValue().toString();
+            String description = snapshot.child("description").getValue().toString();
+            String status = snapshot.child("status").getValue().toString();
+            mDonationList.add(new Donation(id, donorId, title, description, status));
+            mAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            return;
+        }
 
-        mAdapter.notifyDataSetChanged();
+
     }
 
     @Override

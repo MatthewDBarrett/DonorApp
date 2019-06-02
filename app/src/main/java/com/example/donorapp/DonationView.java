@@ -371,9 +371,9 @@ public class DonationView extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if( currentUser != null ) {
             String userID = currentUser.getUid();
-            DatabaseReference userType = userDatabase.child(userID).child( "userType" );
+            DatabaseReference userTypeRef = userDatabase.child(userID).child( "userType" );
 
-            userType.addValueEventListener(new ValueEventListener() {
+            userTypeRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String type = Objects.requireNonNull(dataSnapshot.getValue()).toString();
@@ -382,6 +382,10 @@ public class DonationView extends AppCompatActivity {
                     } else {
                         setUserType(false);
                     }
+//                    if (userType) { //donor
+//                        findViewById(R.id.imageView).setVisibility(View.GONE);
+//                        findViewById(R.id.horizontalScrollView).setVisibility(View.GONE);
+//                    }
                 }
 
                 @Override
