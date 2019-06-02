@@ -19,6 +19,8 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.w3c.dom.Text;
+
 import java.io.InputStream;
 import java.util.List;
 
@@ -50,6 +52,9 @@ public class MyDonationRecyclerViewAdapter extends RecyclerView.Adapter<MyDonati
         holder.mIdView.setText(mDonations.get(position).id);
 //        holder.mDonorView.setText(mDonations.get(position).donorId);
         holder.mTitleView.setText(mDonations.get(position).title);
+        String desc = mDonations.get(position).description;
+        if (desc.length() > 20) desc = desc.substring(0, 20) + "...";
+        holder.mDescView.setText(desc);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +91,7 @@ public class MyDonationRecyclerViewAdapter extends RecyclerView.Adapter<MyDonati
 //        public final TextView mDonorView;
         public final TextView mTitleView;
         public final ImageView mImageView;
+        public final TextView mDescView;
         public Donation mItem;
 
         public ViewHolder(View view) {
@@ -95,6 +101,7 @@ public class MyDonationRecyclerViewAdapter extends RecyclerView.Adapter<MyDonati
 //            mDonorView = (TextView) view.findViewById(R.id.donation_donorId);
             mTitleView = (TextView) view.findViewById(R.id.donation_title);
             mImageView = (ImageView) view.findViewById(R.id.donation_image);
+            mDescView = (TextView) view.findViewById(R.id.donation_desc);
         }
 
         @Override
