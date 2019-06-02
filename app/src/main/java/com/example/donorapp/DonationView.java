@@ -74,6 +74,8 @@ public class DonationView extends AppCompatActivity {
 
     Boolean userType;
 
+    int numStoredImages = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,14 +151,7 @@ public class DonationView extends AppCompatActivity {
         title.setText(mTitle);
         description.setText(mDescription);
 
-        newImage(null, false);
-
-        try {
-            loadImages();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        getNumStoredImages();
     }
 
     @Override
@@ -352,23 +347,24 @@ public class DonationView extends AppCompatActivity {
 
     private void loadImages() throws IOException {
 
-        final File localFile = File.createTempFile("images", "jpg");
+        for(int i = 0; i < numStoredImages + 1; i++){
+            final File localFile = File.createTempFile("images", "jpg");
+            StorageReference image = imagesDatabase.child( String.valueOf( i + 1 ) );
 
-        StorageReference image = imagesDatabase.child("1");
+            image.getFile(localFile)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            newImage( localFile.getAbsolutePath(), false );
+                            setDisplayImage();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
 
-        image.getFile(localFile)
-                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        newImage( localFile.getAbsolutePath(), false );
-                        setDisplayImage();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-
-            }
-        });
+                }
+            });
+        }
     }
 
     private void getUserType(){
@@ -402,6 +398,35 @@ public class DonationView extends AppCompatActivity {
     private void setDisplayImage() {
         SharedPreferences prefs = getSharedPreferences(getResources().getString(R.string.donationPrefsString), Context.MODE_PRIVATE);
         img.setImageURI(Uri.parse(prefs.getString(getResources().getString(R.string.imagePrefsString) + 0, null)));
+    }
+
+    private void getNumStoredImages(){
+        DatabaseReference numImages = donationDatabase.child("numImages");
+
+        numImages.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int num = Integer.valueOf( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
+                setNumStoredImages( num );
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+    }
+
+    private void setNumStoredImages(int num){
+        numStoredImages = num;
+
+        newImage(null, false);
+
+        try {
+            loadImages();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
