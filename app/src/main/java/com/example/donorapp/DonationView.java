@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -65,8 +66,8 @@ import java.util.UUID;
 public class DonationView extends AppCompatActivity {
 
     Button book;
-    EditText title;
-    EditText description;
+    TextView title;
+    TextView description;
     LinearLayout photosLL;
     ImageView img;
 
@@ -106,10 +107,8 @@ public class DonationView extends AppCompatActivity {
         settings = findViewById(R.id.settingsBtn);
         statistics = findViewById(R.id.statisticsBtn);
         book = findViewById(R.id.bookBtn);
-        title = findViewById(R.id.titleET);
-        title.setEnabled(false);
-        description = findViewById(R.id.descriptionET);
-        description.setEnabled(false);
+        title = findViewById(R.id.titleTV);
+        description = findViewById(R.id.descriptionTV);
         photosLL = findViewById(R.id.photosLL);
         img = findViewById(R.id.imageView);
 

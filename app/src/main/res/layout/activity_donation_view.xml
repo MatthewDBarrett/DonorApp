@@ -24,25 +24,26 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/titleET"
-                    android:layout_width="250dp"
+                <TextView
+                    android:id="@+id/titleTV"
+                    android:layout_width="315dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/title"
-                    android:importantForAutofill="no"
-                    android:inputType="textCapWords"
-                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:text="@string/title"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
                     android:layout_marginTop="20dp"
                     tools:ignore="LabelFor" /> <!--Title-->
 
-                <EditText
-                    android:id="@+id/descriptionET"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/description"
-                    android:importantForAutofill="no"
-                    android:inputType="textShortMessage"
-                    android:textSize="20sp"
+                <TextView
+                    android:id="@+id/descriptionTV"
+                    android:layout_width="315dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/box"
+                    android:padding="5dp"
+                    android:textColor="@color/white"
+                    android:text="@string/description"
+                    android:textSize="18sp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     tools:ignore="LabelFor" /> <!--Description-->
