@@ -62,31 +62,7 @@ public class HomePage extends AppCompatActivity implements DonationListFragment.
 
         getUserType();
 
-        newDonation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if( userType ){
-                    Intent intent = new Intent(getApplicationContext(), DonationAd.class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(getApplicationContext(), DonationRequest.class);
-                    startActivity(intent);
-                }
-            }
-        });
 
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if( userType ){
-                    Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(getApplicationContext(), CharitySettingsPage.class);
-                    startActivity(intent);
-                }
-            }
-        });
 
         statistics.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,14 +71,6 @@ public class HomePage extends AppCompatActivity implements DonationListFragment.
                 startActivity(intent);
             }
         });
-
-        fragmentManager = getSupportFragmentManager();
-
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment_container, new DonationListFragment());
-        transaction.addToBackStack(null);
-        transaction.commit();
-
 
         searchBox = (AutoCompleteTextView)findViewById(R.id.searchBox);
         items = (Spinner)findViewById(R.id.items);
@@ -149,9 +117,9 @@ public class HomePage extends AppCompatActivity implements DonationListFragment.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if( currentUser != null ) {
             String userID = currentUser.getUid();
-            DatabaseReference userType = userDatabase.child(userID).child( "userType" );
+            final DatabaseReference userTypeRef = userDatabase.child(userID).child( "userType" );
 
-            userType.addValueEventListener(new ValueEventListener() {
+            userTypeRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String type = Objects.requireNonNull(dataSnapshot.getValue()).toString();
@@ -160,6 +128,9 @@ public class HomePage extends AppCompatActivity implements DonationListFragment.
                     } else {
                         setUserType(false);
                     }
+                    setUserTypeDependentButtons();
+                    setUpDonationListFragment();
+                    searchBox.setHint(String.format(searchBox.getHint().toString(), userType ? "donation requests" : "donations"));
                 }
 
                 @Override
@@ -171,6 +142,47 @@ public class HomePage extends AppCompatActivity implements DonationListFragment.
 
     private void setUserType(Boolean donor){
         userType = donor;
+    }
+
+    private void setUserTypeDependentButtons(){
+        newDonation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if( userType ){
+                    Intent intent = new Intent(getApplicationContext(), DonationAd.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), DonationRequest.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if( userType ){
+                    Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), CharitySettingsPage.class);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    private void setUpDonationListFragment(){
+        fragmentManager = getSupportFragmentManager();
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        DonationListFragment fragment = new DonationListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("usrType", userType ? "donor" : "charity");
+        fragment.setArguments(bundle);
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
 

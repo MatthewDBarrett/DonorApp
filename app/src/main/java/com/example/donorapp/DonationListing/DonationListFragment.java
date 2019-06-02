@@ -53,6 +53,7 @@ public class DonationListFragment extends Fragment  {
     private List<Donation> mDonationList = new ArrayList<>();
     private DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+    private String mUserType;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -74,7 +75,7 @@ public class DonationListFragment extends Fragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mUserType = this.getArguments().getString("usrType");
         mDonationList.clear();
     }
 
@@ -111,10 +112,11 @@ public class DonationListFragment extends Fragment  {
         final ValueEventListener donationListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot donationSnap : dataSnapshot.getChildren()) {
-                    String donationID = donationSnap.getKey();
-                    loadDonation(donationID);
+                    loadDonation(donationSnap);
                 }
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -122,65 +124,38 @@ public class DonationListFragment extends Fragment  {
             }
         };
 
-        ValueEventListener usrTypeListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String usrType = dataSnapshot.getValue(String.class);
-                if (usrType != null) {
-                    if (usrType.equals("donor")) {
-                        try {
-                            dbRef.child("Users")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .child("donations").addValueEventListener(
-                                    donationListener
-                            );
-                        } catch (Exception e) {
-                            Log.d("DonationListing", "No donations found, empty list.");
-                            mDonationList.clear();
-                        }
-                    } else if (usrType.equals("charity")) {
-                        dbRef.child("Donations").addValueEventListener(
-                                donationListener
-                        );
-                    } else {
-                        Log.e("DonationListing", "Got an unexpected user type: " + usrType);
-                    }
-                }
+        if (mUserType.equals("donor"))
+        {
+            try {
+                dbRef.child("Requests").addValueEventListener(
+                    donationListener
+                );
+
+            } catch (Exception e) {
+                Log.d("DonationListing", "No donations found, empty list.");
+                mDonationList.clear();
             }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getContext(), "Failed to load list of donations! Check your internet connection.", Toast.LENGTH_LONG);
-            }
-        };
-        dbRef.child("Users").child(userUid).child("userType").addValueEventListener(usrTypeListener);
+        } else if (mUserType.equals("charity")) {
+            dbRef.child("Donations").addValueEventListener(
+                donationListener
+            );
+        } else {
+            Log.e("DonationListing", "Got an unexpected user type: " + mUserType);
+        }
+
 
     }
 
-    private void loadDonation(final String donationID) {
-        Log.d("DonationListing", "Loading donation " + donationID);
-        dbRef.child("Donations").child(donationID).addValueEventListener(
-            new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String id = snapshot.getKey();
-                    String donorId = snapshot.child("userID").getValue().toString();
-                    String title = snapshot.child("title").getValue().toString();
-                    String description = snapshot.child("description").getValue().toString();
-                    String status = snapshot.child("status").getValue().toString();
-                    mDonationList.add(new Donation(id, donorId, title, description, status));
+    private void loadDonation(final DataSnapshot snapshot) {
+        String id = snapshot.getKey();
+        String donorId = snapshot.child("userID").getValue().toString();
+        String title = snapshot.child("title").getValue().toString();
+        String description = snapshot.child("description").getValue().toString();
+        String status = snapshot.child("status").getValue().toString();
+        mDonationList.add(new Donation(id, donorId, title, description, status));
 
-                    mAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(getContext(), "Failed to load donation id " + donationID + "!", Toast.LENGTH_LONG);
-                }
-            }
-        );
-
-
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

@@ -50,7 +50,7 @@
     <string name="longLatHT">Latitude/Longitude</string>
     <string name="additionalCommentsHT">Additional Comments</string>
     <string name="mapSearchHT">Search Here</string>
-    <string name="searchHT">Search for a donation…</string>
+    <string name="searchHT">Search for %s…</string>
 
     <!--HINTS-->
     <string name="usernameHint">username</string>

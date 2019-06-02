@@ -406,8 +406,10 @@ public class DonationView extends AppCompatActivity {
         numImages.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int num = Integer.valueOf( Objects.requireNonNull(dataSnapshot.getValue()).toString() );
-                setNumStoredImages( num );
+                try {
+                    int num = Integer.valueOf(Objects.requireNonNull(dataSnapshot.getValue()).toString());
+                    setNumStoredImages(num);
+                } catch(Exception e) {}
             }
 
             @Override
