@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/title"
                     android:importantForAutofill="no"
-                    android:inputType="textCapWords"
+                    android:inputType="text"
                     android:textSize="20sp"
                     android:layout_marginTop="20dp"
                     tools:ignore="LabelFor" /> <!--Title-->

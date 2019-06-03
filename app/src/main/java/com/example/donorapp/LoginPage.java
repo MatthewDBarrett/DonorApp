@@ -27,7 +27,6 @@ public class LoginPage extends AppCompatActivity {
     EditText password;
     CardView loginBtn;
     CardView registrationBtn;
-    CardView quickAccess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class LoginPage extends AppCompatActivity {
         password = findViewById(R.id.passwordET);
         loginBtn = findViewById(R.id.loginCV);
         registrationBtn = findViewById(R.id.registrationCV);
-        quickAccess = findViewById(R.id.quickAccessCV);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,14 +54,6 @@ public class LoginPage extends AppCompatActivity {
         registrationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { showDialog(LoginPage.this,"User type?", null);    }
-        });
-
-        quickAccess.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), HomePage.class);
-                startActivity(intent);
-            }
         });
     }
 
